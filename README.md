@@ -1,73 +1,102 @@
-# React + TypeScript + Vite
+# PowerTech Engineering
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive website for PowerTech Engineering - a professional electrical, solar, and smart home solutions provider.
 
-Currently, two official plugins are available:
+![PowerTech Website Screenshot](./public/screenshot.jpg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- **Responsive Design** - Fully mobile-optimized with progressive breakpoints
+- **Modern UI** - Clean, professional design with smooth animations
+- **Hero Carousel** - Auto-playing image slider with overlay text
+- **Animated Statistics** - Numbers count up when scrolled into view
+- **WhatsApp Integration** - Quick contact via WhatsApp floating button
+- **Service Showcase** - Detailed service cards with features
+- **Product Store** - Filterable product catalog
+- **Contact Page** - Multiple contact methods with business hours
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **React 18** - Modern React with hooks
+- **TypeScript** - Type-safe development
+- **Vite** - Fast build tool and dev server
+- **Tailwind CSS v4** - Utility-first styling
+- **React Router** - Client-side routing
+- **Lucide Icons** - Beautiful icon library
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📦 Installation
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/powertech.git
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Navigate to client directory
+cd powertech/client
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🏗️ Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+client/
+├── public/          # Static assets
+├── src/
+│   ├── components/  # Reusable components
+│   │   ├── common/  # Button, Card, Carousel, CountUp
+│   │   ├── layout/  # Header, Footer, Layout
+│   │   └── sections/# Hero, ServiceCard, ProductCard
+│   ├── pages/       # Page components
+│   ├── routes/      # Route configuration
+│   └── index.css    # Global styles & Tailwind config
+└── package.json
+```
+
+## 🎨 Key Components
+
+### CountUp Animation
+
+Animated number counter that triggers when scrolled into view:
+
+```tsx
+<CountUp end={2500} suffix="+" duration={2000} />
+```
+
+### Hero Carousel
+
+Responsive image carousel with auto-play and navigation:
+
+```tsx
+<Hero slides={heroSlides} />
+```
+
+## 📱 Pages
+
+- **Home** - Hero carousel, services preview, stats, CTA sections
+- **Services** - Detailed service cards with features
+- **Store** - Filterable product catalog
+- **Gallery** - Project showcase
+- **About** - Company story and values
+- **Contact** - Contact methods and WhatsApp CTA
+
+## 🌐 Deployment
+
+```bash
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## 📄 License
+
+MIT License - feel free to use this project for your own purposes.
+
+---
+
+Built with ❤️ using React, TypeScript, and Tailwind CSS
