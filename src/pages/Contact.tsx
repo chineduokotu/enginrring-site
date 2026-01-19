@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, MessageCircle, Headphones, Shield, Award } from 'lucide-react';
 
 const contactMethods = [
   {
@@ -8,6 +8,7 @@ const contactMethods = [
     value: '+1 (234) 567-890',
     href: 'tel:+1234567890',
     description: 'Call us for immediate assistance',
+    color: 'from-blue-500 to-blue-600',
   },
   {
     icon: Mail,
@@ -15,13 +16,15 @@ const contactMethods = [
     value: 'info@powertech.com',
     href: 'mailto:info@powertech.com',
     description: 'Send us an email anytime',
+    color: 'from-green-500 to-emerald-500',
   },
   {
     icon: MapPin,
     title: 'Address',
-    value: '123 Engineering Way, Tech City, TC 12345',
+    value: '123 Engineering Way, Tech City',
     href: 'https://maps.google.com',
     description: 'Visit our headquarters',
+    color: 'from-amber-500 to-orange-500',
   },
 ];
 
@@ -32,17 +35,34 @@ const businessHours = [
   { day: 'Emergency Service', hours: '24/7 Available' },
 ];
 
+const trustBadges = [
+  { icon: Headphones, title: '24/7 Support', description: 'Always here for you' },
+  { icon: Shield, title: 'Fully Insured', description: 'Complete protection' },
+  { icon: Award, title: 'ISO Certified', description: 'Quality assured' },
+];
+
 const Contact: React.FC = () => {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 md:pt-40 md:pb-28 bg-gradient-to-br from-navy via-navy-light to-navy">
-        <div className="container-custom px-4 sm:px-6">
+      {/* Hero Section with Background Image */}
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80)',
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/90 to-navy/80" />
+        </div>
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-20 right-10 w-72 h-72 blob-decoration blob-primary" />
+        <div className="absolute bottom-10 left-20 w-48 h-48 blob-decoration blob-yellow" />
+        
+        <div className="container-custom relative z-10 px-4 sm:px-6">
           <div className="max-w-3xl">
-            <span className="inline-block px-4 py-1.5 bg-primary/20 text-primary font-medium rounded-full text-sm mb-4">
-              Contact Us
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+            <span className="badge badge-primary mb-6">Contact Us</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 text-balance">
               Get in Touch
             </h1>
             <p className="text-lg sm:text-xl text-gray-300 leading-relaxed">
@@ -53,8 +73,29 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
+      {/* Trust Badges */}
+      <section className="relative -mt-8 z-20 mb-8">
+        <div className="container-custom">
+          <div className="bg-white rounded-2xl shadow-strong p-6 md:p-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {trustBadges.map((badge) => (
+                <div key={badge.title} className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <badge.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-navy">{badge.title}</h3>
+                    <p className="text-gray-500 text-sm">{badge.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Main Contact Section */}
-      <section className="py-20 md:py-28 bg-gray-50">
+      <section className="py-16 md:py-24 bg-gray-50">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Contact Methods */}
@@ -63,17 +104,17 @@ const Contact: React.FC = () => {
                 Contact Information
               </h2>
 
-              <div className="space-y-6 mb-12">
+              <div className="space-y-5 mb-12">
                 {contactMethods.map((method) => (
                   <a
                     key={method.title}
                     href={method.href}
                     target={method.title === 'Address' ? '_blank' : undefined}
                     rel={method.title === 'Address' ? 'noopener noreferrer' : undefined}
-                    className="flex items-start gap-4 p-5 bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 group"
+                    className="flex items-start gap-4 p-5 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300 group hover-lift"
                   >
-                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors duration-300">
-                      <method.icon className="w-6 h-6 text-primary group-hover:text-white transition-colors duration-300" />
+                    <div className={`w-14 h-14 bg-gradient-to-br ${method.color} rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <method.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-navy mb-1">{method.title}</h3>
@@ -85,9 +126,11 @@ const Contact: React.FC = () => {
               </div>
 
               {/* Business Hours */}
-              <div className="bg-white rounded-xl p-6 shadow-sm">
+              <div className="bg-white rounded-xl p-6 shadow-soft">
                 <div className="flex items-center gap-3 mb-5">
-                  <Clock className="w-6 h-6 text-primary" />
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Clock className="w-5 h-5 text-primary" />
+                  </div>
                   <h3 className="text-xl font-semibold text-navy">Business Hours</h3>
                 </div>
                 <div className="space-y-3">
@@ -97,7 +140,7 @@ const Contact: React.FC = () => {
                       className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0"
                     >
                       <span className="text-gray-600">{item.day}</span>
-                      <span className={`font-medium ${item.day === 'Emergency Service' ? 'text-primary' : 'text-navy'}`}>
+                      <span className={`font-medium ${item.day === 'Emergency Service' ? 'text-primary badge badge-primary' : 'text-navy'}`}>
                         {item.hours}
                       </span>
                     </div>
@@ -109,43 +152,54 @@ const Contact: React.FC = () => {
             {/* WhatsApp CTA & Map */}
             <div>
               {/* Primary WhatsApp CTA */}
-              <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-8 md:p-10 text-center mb-8">
-                <MessageCircle className="w-16 h-16 text-white mx-auto mb-6" />
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                  Chat with Us on WhatsApp
-                </h2>
-                <p className="text-white/90 text-lg mb-8">
-                  Get quick responses to your inquiries. Our team is ready to help
-                  you with any questions about our services.
-                </p>
-                <a
-                  href="https://wa.me/1234567890?text=Hello!%20I%20would%20like%20to%20inquire%20about%20your%20services."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-green-600 font-bold rounded-xl text-lg hover:bg-gray-100 transition-colors duration-300 shadow-lg"
-                >
-                  <MessageCircle className="w-6 h-6" />
-                  Start WhatsApp Chat
-                </a>
-                <p className="text-white/70 text-sm mt-4">
-                  +1 (234) 567-890
-                </p>
+              <div className="relative bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-8 md:p-10 text-center mb-8 overflow-hidden">
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+                
+                <div className="relative z-10">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-full mb-6">
+                    <MessageCircle className="w-10 h-10 text-white" />
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                    Chat with Us on WhatsApp
+                  </h2>
+                  <p className="text-white/90 text-lg mb-8 max-w-md mx-auto">
+                    Get quick responses to your inquiries. Our team is ready to help
+                    you with any questions about our services.
+                  </p>
+                  <a
+                    href="https://wa.me/1234567890?text=Hello!%20I%20would%20like%20to%20inquire%20about%20your%20services."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-green-600 font-bold rounded-xl text-lg hover:bg-gray-100 transition-colors duration-300 shadow-strong btn-shimmer"
+                  >
+                    <MessageCircle className="w-6 h-6" />
+                    Start WhatsApp Chat
+                  </a>
+                  <p className="text-white/70 text-sm mt-4">
+                    +1 (234) 567-890
+                  </p>
+                </div>
               </div>
 
-              {/* Map Placeholder */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-sm">
-                <div className="aspect-video bg-gray-200 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                    <p className="text-gray-500">
-                      Map integration available upon request
-                    </p>
+              {/* Map */}
+              <div className="bg-white rounded-2xl overflow-hidden shadow-soft">
+                <div className="relative aspect-video bg-gray-100">
+                  <img
+                    src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80"
+                    alt="Office location map area"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-navy/20 flex items-center justify-center">
                     <a
                       href="https://maps.google.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-primary font-medium mt-2 hover:underline"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     >
+                      <MapPin className="w-5 h-5" />
                       Open in Google Maps
                     </a>
                   </div>
@@ -160,18 +214,54 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
+      {/* FAQ Teaser */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto text-center">
+            <span className="badge badge-primary mb-4">Questions?</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-6">
+              We're Here to Help
+            </h2>
+            <p className="text-gray-600 text-lg mb-8">
+              Whether you need a quick quote, have technical questions, or want to discuss a large project,
+              our team is ready to assist you. Don't hesitate to reach out!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="tel:+1234567890"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors duration-300 btn-shimmer"
+              >
+                <Phone className="w-5 h-5" />
+                Call Us Now
+              </a>
+              <a
+                href="mailto:info@powertech.com"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gray-100 text-navy font-semibold rounded-lg hover:bg-gray-200 transition-colors duration-300"
+              >
+                <Mail className="w-5 h-5" />
+                Send Email
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Emergency CTA */}
-      <section className="py-16 md:py-20 bg-accent-red">
-        <div className="container-custom text-center">
+      <section className="py-16 md:py-20 bg-gradient-to-r from-accent-red to-red-600 relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+        
+        <div className="container-custom relative z-10 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Need Emergency Assistance?
           </h2>
-          <p className="text-white/90 text-lg mb-6">
+          <p className="text-white/90 text-lg mb-6 max-w-xl mx-auto">
             Our emergency team is available 24/7 for urgent electrical issues.
+            Don't wait – call us immediately for fast response.
           </p>
           <a
             href="tel:+1234567890"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-accent-red font-bold rounded-xl text-lg hover:bg-gray-100 transition-colors duration-300"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-accent-red font-bold rounded-xl text-lg hover:bg-gray-100 transition-colors duration-300 shadow-strong pulse-glow"
           >
             <Phone className="w-5 h-5" />
             Call Emergency Line

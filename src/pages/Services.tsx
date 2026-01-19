@@ -1,12 +1,14 @@
 import React from 'react';
-import { Zap, Shield, Sun, Home as HomeIcon, Fence } from 'lucide-react';
-import ServiceCard from '../components/sections/ServiceCard';
+import { Zap, Shield, Sun, Home as HomeIcon, Fence, ArrowRight, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import Button from '../components/common/Button';
 
 const services = [
   {
     icon: Zap,
     title: 'Electrical Installation',
     description: 'Comprehensive electrical solutions for residential and commercial properties. From new installations to upgrades and repairs, our certified electricians ensure safety and efficiency.',
+    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80',
     features: [
       'Complete wiring and rewiring',
       'Panel upgrades and installations',
@@ -18,6 +20,7 @@ const services = [
     icon: Shield,
     title: 'CCTV Installation & Security Systems',
     description: 'State-of-the-art surveillance and security solutions to protect your property. We provide end-to-end services from design to installation and maintenance.',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
     features: [
       'HD and 4K camera systems',
       'Remote monitoring setup',
@@ -29,6 +32,7 @@ const services = [
     icon: Sun,
     title: 'Solar Energy Solutions',
     description: 'Harness the power of renewable energy with our premium solar installations. Reduce your electricity bills and carbon footprint with sustainable power.',
+    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80',
     features: [
       'Solar panel installation',
       'Battery storage systems',
@@ -40,6 +44,7 @@ const services = [
     icon: HomeIcon,
     title: 'Smart Home Automation',
     description: 'Transform your living space with intelligent automation systems. Control lighting, climate, security, and appliances from anywhere in the world.',
+    image: 'https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=800&q=80',
     features: [
       'Smart lighting systems',
       'Climate control automation',
@@ -51,6 +56,7 @@ const services = [
     icon: Fence,
     title: 'Electric Fencing & Perimeter Security',
     description: 'Robust perimeter protection for residential and commercial properties. Our electric fencing solutions provide reliable security with professional installation.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
     features: [
       'High-voltage security fencing',
       'Integration with alarm systems',
@@ -60,20 +66,41 @@ const services = [
   },
 ];
 
+const processSteps = [
+  { step: '01', title: 'Consultation', description: 'We assess your needs and provide expert recommendations' },
+  { step: '02', title: 'Planning', description: 'Detailed project planning with transparent pricing' },
+  { step: '03', title: 'Installation', description: 'Professional installation by certified technicians' },
+  { step: '04', title: 'Support', description: 'Ongoing maintenance and 24/7 customer support' },
+];
+
 const Services: React.FC = () => {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 md:pt-40 md:pb-28 bg-gradient-to-br from-navy via-navy-light to-navy">
-        <div className="container-custom px-4 sm:px-6">
+      {/* Hero Section with Background Image */}
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1920&q=80)',
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/85 to-navy/70" />
+        </div>
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-20 right-10 w-72 h-72 blob-decoration blob-primary" />
+        <div className="absolute bottom-10 left-10 w-64 h-64 blob-decoration blob-yellow" />
+        
+        <div className="container-custom relative z-10 px-4 sm:px-6">
           <div className="max-w-3xl">
-            <span className="inline-block px-4 py-1.5 bg-primary/20 text-primary font-medium rounded-full text-sm mb-4">
+            <span className="badge badge-primary mb-6">
               Our Services
             </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 text-balance">
               Professional Engineering Solutions
             </h1>
-            <p className="text-lg sm:text-xl text-gray-300 leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-2xl">
               From electrical installations to smart home automation, we deliver premium
               engineering services tailored to your needs. Quality craftsmanship backed
               by industry-leading warranties.
@@ -82,51 +109,137 @@ const Services: React.FC = () => {
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Services Grid with Alternating Layout */}
       <section className="py-20 md:py-28 bg-gray-50">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {services.map((service) => (
-              <ServiceCard
+          <div className="space-y-16 md:space-y-24">
+            {services.map((service, index) => (
+              <div 
                 key={service.title}
-                icon={service.icon}
-                title={service.title}
-                description={service.description}
-                features={service.features}
-                variant="detailed"
-                linkTo="/contact"
-              />
+                className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${
+                  index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                }`}
+              >
+                {/* Image */}
+                <div className={`relative ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                  <div className="relative rounded-2xl overflow-hidden shadow-strong group">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  
+                  {/* Floating Badge */}
+                  <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-primary text-white rounded-xl p-4 md:p-6 shadow-xl hidden sm:block">
+                    <service.icon className="w-8 h-8 md:w-10 md:h-10" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/10 rounded-xl mb-5 lg:hidden">
+                    <service.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-navy mb-4">
+                    {service.title}
+                  </h2>
+                  <p className="text-gray-600 text-lg mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+
+                  {/* Features List */}
+                  <ul className="space-y-3 mb-8">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition-all duration-300 btn-shimmer hover-lift"
+                  >
+                    Get a Quote
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="py-20 md:py-28 bg-white">
+        <div className="container-custom">
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="badge badge-primary mb-4">Our Process</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-6">
+              How We Work
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Our streamlined process ensures quality results and a seamless experience from start to finish.
+            </p>
+          </div>
+
+          {/* Process Steps */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {processSteps.map((item, index) => (
+              <div key={item.step} className="relative">
+                {/* Connector Line */}
+                {index < processSteps.length - 1 && (
+                  <div className="hidden lg:block absolute top-10 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-transparent -z-10" />
+                )}
+                
+                <div className="card-enhanced hover-lift text-center">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary-dark text-white text-2xl font-bold mb-5 shadow-glow-primary">
+                    {item.step}
+                  </div>
+                  <h3 className="text-xl font-semibold text-navy mb-3">{item.title}</h3>
+                  <p className="text-gray-600">{item.description}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 md:py-28 bg-gray-50">
         <div className="container-custom">
-          <div className="bg-gradient-to-r from-primary to-primary-dark rounded-3xl p-8 md:p-12 lg:p-16 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Need a Custom Solution?
-            </h2>
-            <p className="text-white/90 text-lg max-w-2xl mx-auto mb-8">
-              Our team of experts can design and implement bespoke solutions
-              tailored to your specific requirements. Get in touch for a consultation.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-300"
-              >
-                Request a Quote
-              </a>
-              <a
-                href="https://wa.me/1234567890"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent-yellow text-navy font-semibold rounded-lg hover:bg-amber-400 transition-colors duration-300"
-              >
-                WhatsApp Us
-              </a>
+          <div className="relative bg-gradient-to-r from-primary to-primary-dark rounded-3xl p-8 md:p-12 lg:p-16 text-center overflow-hidden">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+            
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Need a Custom Solution?
+              </h2>
+              <p className="text-white/90 text-lg max-w-2xl mx-auto mb-8">
+                Our team of experts can design and implement bespoke solutions
+                tailored to your specific requirements. Get in touch for a consultation.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button variant="secondary" size="lg" href="/contact">
+                  Request a Quote
+                </Button>
+                <Button
+                  variant="whatsapp"
+                  size="lg"
+                  href="https://wa.me/1234567890"
+                  isExternal
+                >
+                  WhatsApp Us
+                </Button>
+              </div>
             </div>
           </div>
         </div>

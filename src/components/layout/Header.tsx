@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Zap } from 'lucide-react';
 import Button from '../common/Button';
@@ -16,6 +16,7 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const touchUsedRef = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,95 +43,120 @@ const Header: React.FC = () => {
     };
   }, [isMenuOpen]);
 
+  // Handle touch for mobile - this fires first on touch devices
+  const handleMenuTouch = useCallback((e: React.TouchEvent) => {
+    e.preventDefault();
+    touchUsedRef.current = true;
+    setIsMenuOpen(prev => !prev);
+    // Reset touch flag after a short delay
+    setTimeout(() => {
+      touchUsedRef.current = false;
+    }, 300);
+  }, []);
+
+  // Handle click for desktop - skip if touch was just used
+  const handleMenuClick = useCallback((e: React.MouseEvent) => {
+    if (touchUsedRef.current) {
+      e.preventDefault();
+      return;
+    }
+    e.preventDefault();
+    setIsMenuOpen(prev => !prev);
+  }, []);
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-md py-3'
-          : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="container-custom">
-        <nav className="flex items-center justify-between">
-          {/* Logo */}
-          <Link
-            to="/"
-            className={`flex items-center gap-2 font-bold text-xl transition-colors ${
-              isScrolled ? 'text-navy' : 'text-white'
-            }`}
-          >
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <Zap className="w-6 h-6 text-white" />
-            </div>
-            <span className="hidden sm:block">PowerTech</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`font-medium transition-colors relative group ${
-                  isScrolled
-                    ? 'text-gray-700 hover:text-primary'
-                    : 'text-white/90 hover:text-white'
-                } ${
-                  location.pathname === link.path
-                    ? isScrolled
-                      ? 'text-primary'
-                      : 'text-white'
-                    : ''
-                }`}
-              >
-                {link.label}
-                <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
-                    location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
-                  }`}
-                />
-              </Link>
-            ))}
-          </div>
-
-          {/* Desktop CTA */}
-          <div className="hidden lg:block">
-            <Button
-              variant="whatsapp"
-              size="sm"
-              href="https://wa.me/1234567890"
-              isExternal
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-white/95 backdrop-blur-md shadow-md py-3'
+            : 'bg-transparent py-5'
+        }`}
+      >
+        <div className="container-custom">
+          <nav className="flex items-center justify-between">
+            {/* Logo */}
+            <Link
+              to="/"
+              className={`flex items-center gap-2 font-bold text-xl transition-colors ${
+                isScrolled ? 'text-navy' : 'text-white'
+              }`}
             >
-              Get Quote
-            </Button>
-          </div>
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                <Zap className="w-6 h-6 text-white" />
+              </div>
+              <span>PowerTech</span>
+            </Link>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`lg:hidden p-2 rounded-lg transition-colors ${
-              isScrolled
-                ? 'text-navy hover:bg-gray-100'
-                : 'text-white hover:bg-white/10'
-            }`}
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </nav>
-      </div>
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`font-medium transition-colors relative group ${
+                    isScrolled
+                      ? 'text-gray-700 hover:text-primary'
+                      : 'text-white/90 hover:text-white'
+                  } ${
+                    location.pathname === link.path
+                      ? isScrolled
+                        ? 'text-primary'
+                        : 'text-white'
+                      : ''
+                  }`}
+                >
+                  {link.label}
+                  <span
+                    className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
+                      location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}
+                  />
+                </Link>
+              ))}
+            </div>
 
-      {/* Mobile Menu Overlay */}
+            {/* Desktop CTA */}
+            <div className="hidden lg:block">
+              <Button
+                variant="whatsapp"
+                size="sm"
+                href="https://wa.me/1234567890"
+                isExternal
+              >
+                Get Quote
+              </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={handleMenuClick}
+              onTouchEnd={handleMenuTouch}
+              className={`lg:hidden p-2 rounded-lg transition-colors z-[60] ${
+                isScrolled
+                  ? 'text-navy hover:bg-gray-100'
+                  : 'text-white hover:bg-white/10'
+              }`}
+              style={{ touchAction: 'manipulation' }}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      {/* Mobile Menu Overlay - Outside header for proper fixed positioning */}
       <div
-        className={`fixed inset-0 bg-navy/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 bg-navy/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden z-[55] ${
           isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsMenuOpen(false)}
       />
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu Drawer - Outside header for proper fixed positioning */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 max-w-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden ${
+        className={`fixed top-0 right-0 h-full w-80 max-w-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden z-[60] ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -183,7 +209,7 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 };
 

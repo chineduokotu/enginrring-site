@@ -49,26 +49,31 @@ const services = [
     icon: Zap,
     title: 'Electrical Installation',
     description: 'Complete electrical solutions from wiring to panel upgrades, delivered by certified professionals.',
+    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&q=80',
   },
   {
     icon: Shield,
     title: 'CCTV & Security',
     description: 'Advanced surveillance systems with remote monitoring and motion detection technology.',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80',
   },
   {
     icon: Sun,
     title: 'Solar Energy',
     description: 'Sustainable power solutions with high-efficiency solar panels and battery storage systems.',
+    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&q=80',
   },
   {
     icon: HomeIcon,
     title: 'Smart Home',
     description: 'Intelligent automation for lighting, climate, and appliances with seamless integration.',
+    image: 'https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=400&q=80',
   },
   {
     icon: Fence,
     title: 'Electric Fencing',
     description: 'Robust perimeter security with professional installation and maintenance services.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80',
   },
 ];
 
@@ -79,6 +84,8 @@ const stats = [
   { value: 50, suffix: '+', label: 'Industry Awards', icon: Award },
 ];
 
+
+
 const Home: React.FC = () => {
   return (
     <div>
@@ -86,17 +93,18 @@ const Home: React.FC = () => {
       <Hero slides={heroSlides} />
 
       {/* Services Preview Section */}
-      <section className="py-20 md:py-28 bg-gray-50">
-        <div className="container-custom">
+      <section className="py-20 md:py-28 bg-gray-50 relative overflow-hidden">
+        {/* Background Decoration */}
+        <div className="absolute top-0 right-0 w-96 h-96 blob-decoration blob-primary" />
+        
+        <div className="container-custom relative z-10">
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-medium rounded-full text-sm mb-4">
-              Our Services
-            </span>
+            <span className="badge badge-primary mb-4">Our Services</span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-6">
               Engineering Excellence for Every Need
             </h2>
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-600 text-lg leading-relaxed">
               From electrical installations to smart home systems, we provide comprehensive
               solutions tailored to your specific requirements.
             </p>
@@ -129,12 +137,15 @@ const Home: React.FC = () => {
       </section>
 
       {/* Trust Indicators / Stats Section */}
-      <section className="py-20 md:py-28 bg-navy">
-        <div className="container-custom">
+      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 grid-pattern opacity-30" />
+        
+        <div className="container-custom relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/20 rounded-2xl mb-4">
+              <div key={stat.label} className="text-center group">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/20 rounded-2xl mb-4 group-hover:bg-primary/30 transition-colors duration-300">
                   <stat.icon className="w-8 h-8 text-primary" />
                 </div>
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2">
@@ -148,20 +159,23 @@ const Home: React.FC = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 md:py-28">
+      <section className="py-20 md:py-28 bg-white">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Image */}
             <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80"
-                alt="Professional engineering team at work"
-                className="rounded-2xl shadow-2xl w-full"
-              />
+              <div className="rounded-2xl overflow-hidden shadow-strong">
+                <img
+                  src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80"
+                  alt="Professional engineering team at work"
+                  className="w-full aspect-[4/3] object-cover"
+                  loading="lazy"
+                />
+              </div>
               {/* Floating Card */}
-              <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-6 max-w-xs hidden md:block">
+              <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-6 max-w-xs hidden md:block hover-lift">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-accent-yellow rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-br from-accent-yellow to-amber-500 rounded-full flex items-center justify-center shadow-lg">
                     <Award className="w-6 h-6 text-navy" />
                   </div>
                   <div>
@@ -170,13 +184,13 @@ const Home: React.FC = () => {
                   </div>
                 </div>
               </div>
+              {/* Decorative Element */}
+              <div className="absolute -top-6 -left-6 w-24 h-24 bg-primary/10 rounded-2xl hidden lg:block" />
             </div>
 
             {/* Content */}
             <div>
-              <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-medium rounded-full text-sm mb-4">
-                Why Choose Us
-              </span>
+              <span className="badge badge-primary mb-4">Why Choose Us</span>
               <h2 className="text-3xl md:text-4xl font-bold text-navy mb-6">
                 Trusted by Thousands of Clients Nationwide
               </h2>
@@ -195,7 +209,9 @@ const Home: React.FC = () => {
                   'Eco-friendly and sustainable solutions',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
+                    <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <CheckCircle className="w-4 h-4 text-primary" />
+                    </div>
                     <span className="text-gray-700">{item}</span>
                   </li>
                 ))}
@@ -214,9 +230,15 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+
+
       {/* CTA Section */}
-      <section className="py-20 md:py-28 bg-primary">
-        <div className="container-custom text-center">
+      <section className="py-20 md:py-28 bg-gradient-to-r from-primary to-primary-dark relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+        
+        <div className="container-custom text-center relative z-10">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
             Ready to Start Your Project?
           </h2>

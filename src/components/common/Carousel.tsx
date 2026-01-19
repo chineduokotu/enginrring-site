@@ -70,9 +70,9 @@ const Carousel: React.FC<CarouselProps> = ({
             </div>
 
             {/* Content */}
-            <div className="relative h-full flex items-center pt-16 sm:pt-20 pb-24 sm:pb-28">
+            <div className="relative h-full flex items-start sm:items-center pt-20 sm:pt-20 pb-32 sm:pb-28">
               <div className="container-custom">
-                <div className="max-w-2xl text-white px-2 sm:px-0">
+                <div className="max-w-2xl text-white px-2 sm:px-0 mt-8 sm:mt-0">
                   <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight text-white">
                     {slide.headline}
                   </h1>
@@ -91,17 +91,17 @@ const Carousel: React.FC<CarouselProps> = ({
         <>
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="absolute left-4 bottom-36 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white z-20"
             aria-label="Previous slide"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="absolute right-4 bottom-36 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white z-20"
             aria-label="Next slide"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
         </>
       )}
