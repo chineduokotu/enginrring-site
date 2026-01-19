@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Lightbulb, Users, Shield, Award, CheckCircle, Calendar, Building, Wrench } from 'lucide-react';
+import { Target, Lightbulb, Users, Shield, Award, CheckCircle, /*Calendar, */Building, Wrench } from 'lucide-react';
 import Button from '../components/common/Button';
 import CountUp from '../components/common/CountUp';
 
