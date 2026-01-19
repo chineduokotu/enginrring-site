@@ -73,10 +73,10 @@ const Carousel: React.FC<CarouselProps> = ({
             <div className="relative h-full flex items-start sm:items-center pt-20 sm:pt-20 pb-32 sm:pb-28">
               <div className="container-custom">
                 <div className="max-w-2xl text-white px-2 sm:px-0 mt-8 sm:mt-0">
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight text-white">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-3 sm:mb-4 md:mb-6 leading-tight text-white drop-shadow-lg" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
                     {slide.headline}
                   </h1>
-                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 mb-4 sm:mb-6 md:mb-8 leading-relaxed">
+                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white font-bold mb-4 sm:mb-6 md:mb-8 leading-relaxed drop-shadow-md">
                     {slide.subheadline}
                   </p>
                 </div>
