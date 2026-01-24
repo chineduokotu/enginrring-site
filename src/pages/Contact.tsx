@@ -205,7 +205,7 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className="p-5">
-                  <h3 className="font-semibold text-navy mb-1">PowerTech Engineering</h3>
+                  <h3 className="font-semibold text-navy mb-1">The BuildersHubb</h3>
                   <p className="text-gray-600">No 1 Efe Amenze Way, Arougba, Off Airport Road, Irhirhi Shop 12</p>
                 </div>
               </div>

@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-6">
               <img src={logo} alt="Logo" className="w-10 h-10 rounded-lg object-cover" />
-              <span className="font-bold text-xl">PowerTech</span>
+              <span className="font-bold text-xl">The BuildersHubb</span>
             </Link>
             <p className="text-gray-400 mb-6 leading-relaxed">
               Premium engineering solutions for homes and businesses. 
@@ -139,7 +139,7 @@ const Footer: React.FC = () => {
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm text-center md:text-left">
-              © {currentYear} PowerTech Engineering. All rights reserved.
+              © {currentYear} The BuildersHubb. All rights reserved.
             </p>
             <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
               <Link

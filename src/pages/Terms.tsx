@@ -29,7 +29,7 @@ const Terms: React.FC = () => {
               Terms & Conditions
             </h1>
             <p className="text-lg sm:text-xl text-gray-300 leading-relaxed">
-              Please read these terms carefully before using our services. They govern your use of PowerTech Engineering services.
+              Please read these terms carefully before using our services. They govern your use of The BuildersHubb services.
             </p>
             <p className="text-gray-400 mt-4">
               Last updated: January 17, 2026
@@ -68,14 +68,14 @@ const Terms: React.FC = () => {
               <div className="prose-custom">
                 <h2>1. Acceptance of Terms</h2>
                 <p>
-                  By accessing and using the services provided by PowerTech Engineering ("Company," "we," "us," or "our"),
+                  By accessing and using the services provided by The BuildersHubb ("Company," "we," "us," or "our"),
                   you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms,
                   you may not use our services.
                 </p>
 
                 <h2 id="services">2. Services</h2>
                 <p>
-                  PowerTech Engineering provides electrical installation, CCTV and security systems, solar energy solutions,
+                  The BuildersHubb provides electrical installation, CCTV and security systems, solar energy solutions,
                   smart home automation, and electric fencing services. All services are subject to availability and may vary
                   by location.
                 </p>
@@ -116,7 +116,7 @@ const Terms: React.FC = () => {
 
                 <h2 id="liability">6. Limitation of Liability</h2>
                 <p>
-                  PowerTech Engineering shall not be liable for any indirect, incidental, special, consequential, or punitive
+                  The BuildersHubb shall not be liable for any indirect, incidental, special, consequential, or punitive
                   damages arising from the use of our services. Our total liability shall not exceed the amount paid for the
                   specific service in question.
                 </p>
@@ -136,7 +136,7 @@ const Terms: React.FC = () => {
 
                 <h2>9. Intellectual Property</h2>
                 <p>
-                  All designs, documentation, and technical specifications created by PowerTech Engineering remain our
+                  All designs, documentation, and technical specifications created by The BuildersHubb remain our
                   intellectual property unless explicitly transferred in writing.
                 </p>
 

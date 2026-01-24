@@ -103,7 +103,7 @@ const About: React.FC = () => {
               Powering Excellence Since 2009
             </h1>
             <p className="text-lg sm:text-xl text-gray-300 leading-relaxed">
-              PowerTech Engineering is a leading provider of electrical, solar, and smart home solutions.
+              The BuildersHubb is a leading provider of electrical, solar, and smart home solutions.
               With a commitment to quality and innovation, we've grown to serve thousands of satisfied clients
               across residential and commercial sectors.
             </p>
@@ -141,7 +141,7 @@ const About: React.FC = () => {
               </h2>
               <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
                 <p>
-                  Founded in 2009, PowerTech Engineering began as a small electrical contracting firm
+                  Founded in 2009, The BuildersHubb began as a small electrical contracting firm
                   with a vision to provide exceptional service and quality workmanship. Over the years,
                   we've evolved into a comprehensive engineering solutions provider, expanding our
                   expertise to include solar energy, security systems, and smart home automation.
@@ -164,7 +164,7 @@ const About: React.FC = () => {
               <div className="relative rounded-2xl overflow-hidden shadow-strong">
                 <img
                   src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
-                  alt="PowerTech team at work"
+                  alt="The BuildersHubb team at work"
                   className="w-full aspect-[4/3] object-cover"
                   loading="lazy"
                 />
@@ -356,7 +356,7 @@ const About: React.FC = () => {
             Let's Work Together
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
-            Ready to experience the PowerTech difference? Contact us today to discuss
+            Ready to experience The BuildersHubb difference? Contact us today to discuss
             your project and receive a free consultation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

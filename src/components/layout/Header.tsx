@@ -84,7 +84,7 @@ const Header: React.FC = () => {
               }`}
             >
               <img src={logo} alt="Logo" className="w-10 h-10 rounded-lg object-cover" />
-              <span>PowerTech</span>
+              <span>The BuildersHubb</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -164,7 +164,7 @@ const Header: React.FC = () => {
           <div className="flex items-center justify-between p-6 border-b border-gray-100">
             <Link to="/" className="flex items-center gap-2 font-bold text-xl text-navy">
               <img src={logo} alt="Logo" className="w-10 h-10 rounded-lg object-cover" />
-              <span>PowerTech</span>
+              <span>The BuildersHubb</span>
             </Link>
             <button
               onClick={() => setIsMenuOpen(false)}

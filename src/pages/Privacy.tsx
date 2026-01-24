@@ -67,7 +67,7 @@ const Privacy: React.FC = () => {
             <div className="bg-white rounded-2xl shadow-soft p-8 md:p-12">
               <div className="prose-custom">
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  PowerTech Engineering ("Company," "we," "us," or "our") is committed to protecting your privacy. This
+                  The BuildersHubb ("Company," "we," "us," or "our") is committed to protecting your privacy. This
                   Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our
                   services or visit our website.
                 </p>
