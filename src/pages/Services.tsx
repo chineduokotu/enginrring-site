@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Zap, Shield, Sun, Home as HomeIcon, Fence, ArrowRight, CheckCircle, Wrench, Settings, Loader2, AlertCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import Button from '../components/common/Button';
 import { servicesApi } from '../services/api';
 import type { Service } from '../services/api';
