@@ -158,7 +158,7 @@ const Terms: React.FC = () => {
                 </p>
                 <ul>
                   <li><strong>Email:</strong> legal@powertech.com</li>
-                  <li><strong>Phone:</strong> +1 (234) 567-890</li>
+                  <li><strong>Phone:</strong> 09136030440</li>
                   <li><strong>Address:</strong> 123 Engineering Way, Tech City, TC 12345</li>
                 </ul>
               </div>

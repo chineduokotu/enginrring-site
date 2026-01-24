@@ -1,121 +1,29 @@
-import React, { useState } from 'react';
-import { ShoppingBag, Star, ArrowRight, Sparkles } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ShoppingBag, Star, ArrowRight, Sparkles, Loader2, AlertCircle } from 'lucide-react';
+import { productsApi } from '../services/api';
+import type { Product } from '../services/api';
 
 const categories = ['All', 'Electrical', 'Solar', 'Security', 'Smart Home'];
 
-const products = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
-    name: 'Professional CCTV Camera System',
-    price: 'From $299',
-    category: 'Security',
-    featured: true,
-    rating: 4.9,
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80',
-    name: 'Solar Panel Kit 5kW',
-    price: 'From $2,499',
-    category: 'Solar',
-    featured: true,
-    rating: 4.8,
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=600&q=80',
-    name: 'Smart Thermostat Pro',
-    price: 'From $199',
-    category: 'Smart Home',
-    featured: false,
-    rating: 4.7,
-  },
-  {
-    id: 4,
-    image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80',
-    name: 'LED Panel Light Set',
-    price: 'From $89',
-    category: 'Electrical',
-    featured: false,
-    rating: 4.6,
-  },
-  {
-    id: 5,
-    image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80',
-    name: 'Solar Battery Storage 10kWh',
-    price: 'From $3,999',
-    category: 'Solar',
-    featured: true,
-    rating: 4.9,
-  },
-  {
-    id: 6,
-    image: 'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=600&q=80',
-    name: 'Smart Door Lock with Fingerprint',
-    price: 'From $249',
-    category: 'Smart Home',
-    featured: false,
-    rating: 4.5,
-  },
-  {
-    id: 7,
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80',
-    name: 'Industrial Circuit Breaker Panel',
-    price: 'From $549',
-    category: 'Electrical',
-    featured: false,
-    rating: 4.7,
-  },
-  {
-    id: 8,
-    image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=600&q=80',
-    name: 'Motion Sensor Flood Light',
-    price: 'From $79',
-    category: 'Security',
-    featured: false,
-    rating: 4.4,
-  },
-  {
-    id: 9,
-    image: 'https://images.unsplash.com/photo-1593941707882-a56bbc8df44c?w=600&q=80',
-    name: 'Smart Home Hub Controller',
-    price: 'From $149',
-    category: 'Smart Home',
-    featured: false,
-    rating: 4.6,
-  },
-  {
-    id: 10,
-    image: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=600&q=80',
-    name: 'Solar Inverter 8kW',
-    price: 'From $1,299',
-    category: 'Solar',
-    featured: false,
-    rating: 4.8,
-  },
-  {
-    id: 11,
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80',
-    name: 'Electric Fence Energizer',
-    price: 'From $399',
-    category: 'Security',
-    featured: false,
-    rating: 4.5,
-  },
-  {
-    id: 12,
-    image: 'https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?w=600&q=80',
-    name: 'Surge Protection Device',
-    price: 'From $129',
-    category: 'Electrical',
-    featured: false,
-    rating: 4.3,
-  },
-];
-
 const Store: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await productsApi.getAll();
+        setProducts(response.data);
+      } catch {
+        setError('Failed to load products');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const filteredProducts =
     activeCategory === 'All'
@@ -123,6 +31,10 @@ const Store: React.FC = () => {
       : products.filter((product) => product.category === activeCategory);
 
   const featuredProducts = products.filter((p) => p.featured);
+
+  const formatPrice = (price: number) => {
+    return `From ₦${price.toLocaleString()}`;
+  };
 
   return (
     <div>
@@ -155,44 +67,46 @@ const Store: React.FC = () => {
       </section>
 
       {/* Featured Products Banner */}
-      <section className="relative -mt-8 z-20 mb-8">
-        <div className="container-custom">
-          <div className="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-6 md:p-8 overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-            
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
-                  <Sparkles className="w-7 h-7 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white">Featured Products</h3>
-                  <p className="text-white/80">Top-rated items with special offers</p>
-                </div>
-              </div>
+      {featuredProducts.length > 0 && (
+        <section className="relative -mt-8 z-20 mb-8">
+          <div className="container-custom">
+            <div className="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-6 md:p-8 overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
               
-              <div className="flex gap-3 flex-wrap justify-center">
-                {featuredProducts.slice(0, 3).map((product) => (
-                  <div
-                    key={product.id}
-                    className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2"
-                  >
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-10 h-10 rounded object-cover"
-                    />
-                    <div>
-                      <p className="text-white font-medium text-sm line-clamp-1">{product.name.split(' ').slice(0, 2).join(' ')}</p>
-                      <p className="text-accent-yellow text-xs">{product.price}</p>
-                    </div>
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                    <Sparkles className="w-7 h-7 text-white" />
                   </div>
-                ))}
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Featured Products</h3>
+                    <p className="text-white/80">Top-rated items with special offers</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-3 flex-wrap justify-center">
+                  {featuredProducts.slice(0, 3).map((product) => (
+                    <div
+                      key={product._id}
+                      className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2"
+                    >
+                      <img
+                        src={product.images[0]?.url || 'https://via.placeholder.com/40'}
+                        alt={product.name}
+                        className="w-10 h-10 rounded object-cover"
+                      />
+                      <div>
+                        <p className="text-white font-medium text-sm line-clamp-1">{product.name.split(' ').slice(0, 2).join(' ')}</p>
+                        <p className="text-accent-yellow text-xs">{formatPrice(product.price)}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Products Section */}
       <section className="py-16 md:py-24 bg-gray-50">
@@ -214,87 +128,104 @@ const Store: React.FC = () => {
             ))}
           </div>
 
+          {/* Loading State */}
+          {isLoading && (
+            <div className="flex items-center justify-center py-16">
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && (
+            <div className="flex flex-col items-center justify-center py-16">
+              <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
+              <p className="text-gray-600">{error}</p>
+            </div>
+          )}
+
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map((product) => (
-              <div
-                key={product.id}
-                className="group bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-strong transition-all duration-500 hover-lift"
-              >
-                {/* Image Container */}
-                <div className="relative aspect-square overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  
-                  {/* Featured Badge */}
-                  {product.featured && (
-                    <div className="absolute top-4 left-4">
-                      <span className="badge badge-featured flex items-center gap-1">
-                        <Star className="w-3 h-3" />
-                        Featured
-                      </span>
+          {!isLoading && !error && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredProducts.map((product) => (
+                <div
+                  key={product._id}
+                  className="group bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-strong transition-all duration-500 hover-lift"
+                >
+                  {/* Image Container */}
+                  <div className="relative aspect-square overflow-hidden">
+                    <img
+                      src={product.images[0]?.url || 'https://via.placeholder.com/400'}
+                      alt={product.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    
+                    {/* Featured Badge */}
+                    {product.featured && (
+                      <div className="absolute top-4 left-4">
+                        <span className="badge badge-featured flex items-center gap-1">
+                          <Star className="w-3 h-3" />
+                          Featured
+                        </span>
+                      </div>
+                    )}
+                    
+                    {/* Category Badge */}
+                    <div className="absolute top-4 right-4">
+                      <span className="badge badge-primary">{product.category}</span>
                     </div>
-                  )}
-                  
-                  {/* Category Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="badge badge-primary">{product.category}</span>
+                    
+                    {/* Quick Action Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-6">
+                      <a
+                        href="/contact"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary font-semibold rounded-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg"
+                      >
+                        <ShoppingBag className="w-4 h-4" />
+                        Inquire Now
+                      </a>
+                    </div>
                   </div>
                   
-                  {/* Quick Action Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-6">
-                    <a
-                      href="/contact"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary font-semibold rounded-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg"
-                    >
-                      <ShoppingBag className="w-4 h-4" />
-                      Inquire Now
-                    </a>
-                  </div>
-                </div>
-                
-                {/* Content */}
-                <div className="p-5">
-                  {/* Rating */}
-                  <div className="flex items-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${
-                          i < Math.floor(product.rating)
-                            ? 'fill-accent-yellow text-accent-yellow'
-                            : 'text-gray-300'
-                        }`}
-                      />
-                    ))}
-                    <span className="text-sm text-gray-500 ml-1">{product.rating}</span>
-                  </div>
-                  
-                  <h3 className="font-semibold text-navy mb-2 group-hover:text-primary transition-colors duration-300 line-clamp-2">
-                    {product.name}
-                  </h3>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold gradient-text">{product.price}</span>
-                    <a
-                      href="/contact"
-                      className="inline-flex items-center gap-1 text-primary font-medium text-sm group-hover:gap-2 transition-all duration-300"
-                    >
-                      Details
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                  {/* Content */}
+                  <div className="p-5">
+                    {/* Rating */}
+                    <div className="flex items-center gap-1 mb-2">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-4 h-4 ${
+                            i < Math.floor(product.rating)
+                              ? 'fill-accent-yellow text-accent-yellow'
+                              : 'text-gray-300'
+                          }`}
+                        />
+                      ))}
+                      <span className="text-sm text-gray-500 ml-1">{product.rating}</span>
+                    </div>
+                    
+                    <h3 className="font-semibold text-navy mb-2 group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                      {product.name}
+                    </h3>
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-lg font-bold gradient-text">{formatPrice(product.price)}</span>
+                      <a
+                        href="/contact"
+                        className="inline-flex items-center gap-1 text-primary font-medium text-sm group-hover:gap-2 transition-all duration-300"
+                      >
+                        Details
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           {/* Empty State */}
-          {filteredProducts.length === 0 && (
+          {!isLoading && !error && filteredProducts.length === 0 && (
             <div className="text-center py-16">
               <p className="text-gray-500 text-lg">
                 No products found in this category.

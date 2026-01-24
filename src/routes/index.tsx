@@ -9,6 +9,16 @@ import Contact from '../pages/Contact';
 import Terms from '../pages/Terms';
 import Privacy from '../pages/Privacy';
 
+// Admin imports
+import AdminLogin from '../pages/admin/AdminLogin';
+import AdminLayout from '../components/admin/AdminLayout';
+import AdminDashboard from '../pages/admin/AdminDashboard';
+import ProductList from '../pages/admin/ProductList';
+import ProductForm from '../pages/admin/ProductForm';
+import GalleryManagement from '../pages/admin/GalleryManagement';
+import ServiceManagement from '../pages/admin/ServiceManagement';
+import ServiceForm from '../pages/admin/ServiceForm';
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -45,6 +55,53 @@ export const router = createBrowserRouter([
       {
         path: 'privacy',
         element: <Privacy />,
+      },
+    ],
+  },
+  // Admin routes
+  {
+    path: '/admin/login',
+    element: <AdminLogin />,
+  },
+  {
+    path: '/admin',
+    element: <AdminLayout />,
+    children: [
+      {
+        index: true,
+        element: <AdminDashboard />,
+      },
+      {
+        path: 'dashboard',
+        element: <AdminDashboard />,
+      },
+      {
+        path: 'products',
+        element: <ProductList />,
+      },
+      {
+        path: 'products/new',
+        element: <ProductForm />,
+      },
+      {
+        path: 'products/:id/edit',
+        element: <ProductForm />,
+      },
+      {
+        path: 'services',
+        element: <ServiceManagement />,
+      },
+      {
+        path: 'services/new',
+        element: <ServiceForm />,
+      },
+      {
+        path: 'services/:id/edit',
+        element: <ServiceForm />,
+      },
+      {
+        path: 'gallery',
+        element: <GalleryManagement />,
       },
     ],
   },

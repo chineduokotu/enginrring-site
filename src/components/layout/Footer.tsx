@@ -74,6 +74,14 @@ const Footer: React.FC = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  to="/admin/login"
+                  className="text-gray-400 hover:text-white transition-colors duration-300 inline-flex items-center gap-2"
+                >
+                  Panel <span className="text-red-500 text-xs">(admin only)</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -100,11 +108,11 @@ const Footer: React.FC = () => {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="tel:+1234567890"
+                  href="tel:09136030440"
                   className="flex items-start gap-3 text-gray-400 hover:text-white transition-colors duration-300"
                 >
                   <Phone className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <span>+1 (234) 567-890</span>
+                  <span>09136030440</span>
                 </a>
               </li>
               <li>
@@ -131,10 +139,10 @@ const Footer: React.FC = () => {
       <div className="border-t border-white/10">
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-sm text-center md:text-left">
               © {currentYear} PowerTech Engineering. All rights reserved.
             </p>
-            <div className="flex gap-6 text-sm">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
               <Link
                 to="/terms"
                 className="text-gray-400 hover:text-white transition-colors duration-300"

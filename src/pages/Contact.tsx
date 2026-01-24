@@ -5,8 +5,8 @@ const contactMethods = [
   {
     icon: Phone,
     title: 'Phone',
-    value: '+1 (234) 567-890',
-    href: 'tel:+1234567890',
+    value: '09136030440',
+    href: 'tel:09136030440',
     description: 'Call us for immediate assistance',
     color: 'from-blue-500 to-blue-600',
   },
@@ -169,7 +169,7 @@ const Contact: React.FC = () => {
                     you with any questions about our services.
                   </p>
                   <a
-                    href="https://wa.me/1234567890?text=Hello!%20I%20would%20like%20to%20inquire%20about%20your%20services."
+                    href="https://wa.me/2349136030440?text=Hello!%20I%20would%20like%20to%20inquire%20about%20your%20services."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-green-600 font-bold rounded-xl text-lg hover:bg-gray-100 transition-colors duration-300 shadow-strong btn-shimmer"
@@ -178,7 +178,7 @@ const Contact: React.FC = () => {
                     Start WhatsApp Chat
                   </a>
                   <p className="text-white/70 text-sm mt-4">
-                    +1 (234) 567-890
+                    09136030440
                   </p>
                 </div>
               </div>
@@ -228,7 +228,7 @@ const Contact: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:+1234567890"
+                href="tel:09136030440"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors duration-300 btn-shimmer"
               >
                 <Phone className="w-5 h-5" />
@@ -260,7 +260,7 @@ const Contact: React.FC = () => {
             Don't wait – call us immediately for fast response.
           </p>
           <a
-            href="tel:+1234567890"
+            href="tel:09136030440"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-accent-red font-bold rounded-xl text-lg hover:bg-gray-100 transition-colors duration-300 shadow-strong pulse-glow"
           >
             <Phone className="w-5 h-5" />
