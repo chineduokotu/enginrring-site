@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Zap, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import logo from '../../assets/image/logo.jpeg';
 
 const quickLinks = [
   { path: '/', label: 'Home' },
@@ -36,9 +37,7 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <Zap className="w-6 h-6 text-white" />
-              </div>
+              <img src={logo} alt="Logo" className="w-10 h-10 rounded-lg object-cover" />
               <span className="font-bold text-xl">PowerTech</span>
             </Link>
             <p className="text-gray-400 mb-6 leading-relaxed">
@@ -127,7 +126,7 @@ const Footer: React.FC = () => {
               <li>
                 <div className="flex items-start gap-3 text-gray-400">
                   <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <span>123 Engineering Way,<br />Tech City, TC 12345</span>
+                  <span>No 1 Efe Amenze Way, Arougba,<br />Off Airport Road, Irhirhi Shop 12</span>
                 </div>
               </li>
             </ul>

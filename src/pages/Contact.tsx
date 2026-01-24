@@ -21,8 +21,8 @@ const contactMethods = [
   {
     icon: MapPin,
     title: 'Address',
-    value: '123 Engineering Way, Tech City',
-    href: 'https://maps.google.com',
+    value: 'No 1 Efe Amenze Way, Arougba',
+    href: 'https://www.google.com/maps/search/No+1+Efe+Amenze+Way+Arougba+Airport+Road+Irhirhi+Benin+City+Nigeria',
     description: 'Visit our headquarters',
     color: 'from-amber-500 to-orange-500',
   },
@@ -194,7 +194,7 @@ const Contact: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-navy/20 flex items-center justify-center">
                     <a
-                      href="https://maps.google.com"
+                      href="https://www.google.com/maps/search/No+1+Efe+Amenze+Way+Arougba+Airport+Road+Irhirhi+Benin+City+Nigeria"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
@@ -206,7 +206,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="p-5">
                   <h3 className="font-semibold text-navy mb-1">PowerTech Engineering</h3>
-                  <p className="text-gray-600">123 Engineering Way, Tech City, TC 12345</p>
+                  <p className="text-gray-600">No 1 Efe Amenze Way, Arougba, Off Airport Road, Irhirhi Shop 12</p>
                 </div>
               </div>
             </div>

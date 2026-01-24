@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Zap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Button from '../common/Button';
+import logo from '../../assets/image/logo.jpeg';
 
 const navLinks = [
   { path: '/', label: 'Home' },
@@ -82,9 +83,7 @@ const Header: React.FC = () => {
                 isScrolled ? 'text-navy' : 'text-white'
               }`}
             >
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <Zap className="w-6 h-6 text-white" />
-              </div>
+              <img src={logo} alt="Logo" className="w-10 h-10 rounded-lg object-cover" />
               <span>PowerTech</span>
             </Link>
 
@@ -121,7 +120,7 @@ const Header: React.FC = () => {
               <Button
                 variant="whatsapp"
                 size="sm"
-                href="https://wa.me/1234567890"
+                href="https://wa.me/2349136030440"
                 isExternal
               >
                 Get Quote
@@ -164,9 +163,7 @@ const Header: React.FC = () => {
           {/* Mobile Menu Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-100">
             <Link to="/" className="flex items-center gap-2 font-bold text-xl text-navy">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <Zap className="w-6 h-6 text-white" />
-              </div>
+              <img src={logo} alt="Logo" className="w-10 h-10 rounded-lg object-cover" />
               <span>PowerTech</span>
             </Link>
             <button
@@ -200,7 +197,7 @@ const Header: React.FC = () => {
             <Button
               variant="whatsapp"
               size="md"
-              href="https://wa.me/1234567890"
+              href="https://wa.me/2349136030440"
               isExternal
               className="w-full"
             >

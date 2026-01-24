@@ -177,7 +177,7 @@ const Privacy: React.FC = () => {
                 <ul>
                   <li><strong>Email:</strong> privacy@powertech.com</li>
                   <li><strong>Phone:</strong> 09136030440</li>
-                  <li><strong>Address:</strong> 123 Engineering Way, Tech City, TC 12345</li>
+                  <li><strong>Address:</strong> No 1 Efe Amenze Way, Arougba, Off Airport Road, Irhirhi Shop 12</li>
                 </ul>
               </div>
             </div>
