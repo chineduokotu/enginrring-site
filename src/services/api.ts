@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const production_url='https://thebuilders-server.onrender.com/api';
+const local_url='http://localhost:3000/api' 
+
+const API_BASE_URL = production_url || local_url
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -20,6 +23,7 @@ export const authApi = {
   login: (username: string, password: string) =>
     api.post('/auth/login', { username, password }),
   getMe: () => api.get('/auth/me'),
+  changePassword: (data: any) => api.put('/auth/change-password', data),
   logout: () => api.post('/auth/logout'),
 };
 

@@ -13,8 +13,8 @@ const contactMethods = [
   {
     icon: Mail,
     title: 'Email',
-    value: 'info@powertech.com',
-    href: 'mailto:info@powertech.com',
+    value: 'info@thebuildershubb.com',
+    href: 'mailto:info@thebuildershubb.com',
     description: 'Send us an email anytime',
     color: 'from-green-500 to-emerald-500',
   },
@@ -187,8 +187,8 @@ const Contact: React.FC = () => {
               <div className="bg-white rounded-2xl overflow-hidden shadow-soft">
                 <div className="relative aspect-video bg-gray-100">
                   <img
-                    src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80"
-                    alt="Office location map area"
+                    src="/images/map-location.jpg"
+                    alt="TheBuildersHubb Ventures location on Google Maps"
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -235,7 +235,7 @@ const Contact: React.FC = () => {
                 Call Us Now
               </a>
               <a
-                href="mailto:info@powertech.com"
+                href="mailto:info@thebuildershubb.com"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gray-100 text-navy font-semibold rounded-lg hover:bg-gray-200 transition-colors duration-300"
               >
                 <Mail className="w-5 h-5" />

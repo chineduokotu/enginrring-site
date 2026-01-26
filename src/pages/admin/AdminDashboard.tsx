@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Package, Image, Plus, AlertCircle, Loader2, Settings } from 'lucide-react';
+import { Package, Image, Plus, AlertCircle, Loader2, Settings, Lock } from 'lucide-react';
 import { productsApi, galleryApi, servicesApi } from '../../services/api';
 
 const AdminDashboard: React.FC = () => {
@@ -129,6 +129,16 @@ const AdminDashboard: React.FC = () => {
             <Image className="w-4 sm:w-5 h-4 sm:h-5 text-purple-600" />
           </div>
           <span className="font-medium text-gray-700 text-sm sm:text-base">Gallery</span>
+        </Link>
+
+        <Link
+          to="/admin/settings"
+          className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-white rounded-xl shadow-soft hover:shadow-strong transition-shadow"
+        >
+          <div className="w-8 sm:w-10 h-8 sm:h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+            <Lock className="w-4 sm:w-5 h-4 sm:h-5 text-gray-600" />
+          </div>
+          <span className="font-medium text-gray-700 text-sm sm:text-base">Settings</span>
         </Link>
 
         <a

@@ -18,6 +18,7 @@ import ProductForm from '../pages/admin/ProductForm';
 import GalleryManagement from '../pages/admin/GalleryManagement';
 import ServiceManagement from '../pages/admin/ServiceManagement';
 import ServiceForm from '../pages/admin/ServiceForm';
+import AdminSettings from '../pages/admin/AdminSettings';
 
 export const router = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ export const router = createBrowserRouter([
       {
         path: 'gallery',
         element: <GalleryManagement />,
+      },
+      {
+        path: 'settings',
+        element: <AdminSettings />,
       },
     ],
   },

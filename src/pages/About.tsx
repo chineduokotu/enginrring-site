@@ -311,7 +311,7 @@ const About: React.FC = () => {
             <div className="order-2 lg:order-1 relative">
               <div className="rounded-2xl overflow-hidden shadow-strong">
                 <img
-                  src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80"
+                  src="/assets/smart-home-solutions.jpg"
                   alt="Professional installation"
                   className="w-full aspect-[4/3] object-cover"
                   loading="lazy"

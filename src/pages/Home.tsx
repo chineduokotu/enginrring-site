@@ -166,8 +166,8 @@ const Home: React.FC = () => {
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-strong">
                 <img
-                  src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80"
-                  alt="Professional engineering team at work"
+                  src="/images/solar-panels-hero.jpg"
+                  alt="Solar panel installations by TheBuildersHubb"
                   className="w-full aspect-[4/3] object-cover"
                   loading="lazy"
                 />

@@ -1,6 +1,24 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Instagram } from 'lucide-react';
 import logo from '../../assets/image/logo.jpeg';
+
+// Custom TikTok Icon component to match Lucide style
+const Tiktok = ({ className }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="24" 
+    height="24" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
 
 const quickLinks = [
   { path: '/', label: 'Home' },
@@ -20,10 +38,9 @@ const services = [
 ];
 
 const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61550482598066', label: 'Facebook' },
+  { icon: Instagram, href: 'https://www.instagram.com/thebuildershubb?igsh=MTBramhzODY2MmVmdg==', label: 'Instagram' },
+  { icon: Tiktok, href: 'https://www.tiktok.com/@thebuildershubb', label: 'TikTok' },
 ];
 
 const Footer: React.FC = () => {
@@ -116,11 +133,11 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="mailto:info@powertech.com"
+                  href="mailto:info@thebuildershubb.com"
                   className="flex items-start gap-3 text-gray-400 hover:text-white transition-colors duration-300"
                 >
                   <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <span>info@powertech.com</span>
+                  <span>info@thebuildershubb.com</span>
                 </a>
               </li>
               <li>
