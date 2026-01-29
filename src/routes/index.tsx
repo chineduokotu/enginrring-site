@@ -19,6 +19,7 @@ import GalleryManagement from '../pages/admin/GalleryManagement';
 import ServiceManagement from '../pages/admin/ServiceManagement';
 import ServiceForm from '../pages/admin/ServiceForm';
 import AdminSettings from '../pages/admin/AdminSettings';
+import CategoryManagement from '../pages/admin/CategoryManagement';
 
 export const router = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ export const router = createBrowserRouter([
       {
         path: 'services/:id/edit',
         element: <ServiceForm />,
+      },
+      {
+        path: 'categories',
+        element: <CategoryManagement />,
       },
       {
         path: 'gallery',

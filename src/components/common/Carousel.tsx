@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Button from './Button';
 
 interface CarouselSlide {
   id: number;
   image: string;
   headline: string;
   subheadline: string;
+  ctaText?: string;
+  ctaLink?: string;
+  isExternal?: boolean;
 }
 
 interface CarouselProps {
@@ -79,6 +83,19 @@ const Carousel: React.FC<CarouselProps> = ({
                   <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white font-bold mb-4 sm:mb-6 md:mb-8 leading-relaxed drop-shadow-md">
                     {slide.subheadline}
                   </p>
+                  {slide.ctaText && slide.ctaLink && (
+                    <div className="mt-4 sm:mt-6">
+                      <Button
+                        variant={slide.ctaText.includes('WhatsApp') ? 'whatsapp' : 'primary'}
+                        size="md"
+                        href={slide.ctaLink}
+                        isExternal={slide.isExternal}
+                        className="!px-8 !py-3 sm:!px-10 sm:!py-4 !text-base sm:!text-lg font-bold shadow-lg"
+                      >
+                        {slide.ctaText}
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,28 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { ShoppingBag, Star, ArrowRight, Sparkles, Loader2, AlertCircle } from 'lucide-react';
-import { productsApi } from '../services/api';
+import { productsApi, categoriesApi } from '../services/api';
 import type { Product } from '../services/api';
 
-const categories = ['All', 'Electrical', 'Solar', 'Security', 'Smart Home'];
+const categoryImages: Record<string, string> = {
+  'Electrical': '/images/category_electrical.png',
+  'Solar': '/images/category_solar.png',
+  'Security': '/images/category_security.png',
+  'Smart Home': '/images/category_smarthome.png',
+  'All': 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80',
+};
+
+const defaultCategoryImage = 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80';
 
 const Store: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [categories, setCategories] = useState<{name: string, image: string}[]>([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
-        const response = await productsApi.getAll();
-        setProducts(response.data);
+        const [productsRes, categoriesRes] = await Promise.all([
+          productsApi.getAll(),
+          categoriesApi.getAll()
+        ]);
+        
+        setProducts(productsRes.data);
+        
+        const dynamicCategories = categoriesRes.data.map(cat => ({
+          name: cat.name,
+          image: categoryImages[cat.name] || defaultCategoryImage
+        }));
+        
+        setCategories([
+          { name: 'All', image: categoryImages['All'] },
+          ...dynamicCategories
+        ]);
       } catch {
-        setError('Failed to load products');
+        setError('Failed to load store data');
       } finally {
         setIsLoading(false);
       }
     };
-    fetchProducts();
+    fetchData();
   }, []);
 
   const filteredProducts =
@@ -36,8 +59,14 @@ const Store: React.FC = () => {
     return `From ₦${price.toLocaleString()}`;
   };
 
+  const getWhatsAppLink = (productName: string) => {
+    const message = encodeURIComponent(`Hello! I want this product: ${productName}`);
+    return `https://wa.me/2349136030440?text=${message}`;
+  };
+
   return (
     <div>
+
       {/* Hero Section */}
       <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 md:pt-40 md:pb-28 overflow-hidden">
         <div
@@ -86,9 +115,12 @@ const Store: React.FC = () => {
                 
                 <div className="flex gap-3 flex-wrap justify-center">
                   {featuredProducts.slice(0, 3).map((product) => (
-                    <div
+                    <a
                       key={product._id}
-                      className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2"
+                      href={getWhatsAppLink(product.name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 hover:bg-white/20 transition-colors duration-300"
                     >
                       <img
                         src={product.images[0]?.url || 'https://via.placeholder.com/40'}
@@ -99,7 +131,7 @@ const Store: React.FC = () => {
                         <p className="text-white font-medium text-sm line-clamp-1">{product.name.split(' ').slice(0, 2).join(' ')}</p>
                         <p className="text-accent-yellow text-xs">{formatPrice(product.price)}</p>
                       </div>
-                    </div>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -111,19 +143,52 @@ const Store: React.FC = () => {
       {/* Products Section */}
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="container-custom">
-          {/* Category Filter */}
-          <div className="flex flex-wrap gap-3 mb-12 justify-center">
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="badge badge-primary mb-4">Store Departments</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+              Browse Categories
+            </h2>
+            <div className="w-20 h-1.5 bg-primary rounded-full mx-auto" />
+          </div>
+          {/* Category Cards Filter */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-16">
             {categories.map((category) => (
               <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  activeCategory === category
-                    ? 'bg-gradient-to-r from-primary to-primary-dark text-white shadow-lg shadow-primary/25 scale-105'
-                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-primary/30'
+                key={category.name}
+                onClick={() => setActiveCategory(category.name)}
+                className={`group relative aspect-[4/3] rounded-2xl overflow-hidden transition-all duration-500 hover-lift ${
+                  activeCategory === category.name
+                    ? 'ring-4 ring-primary ring-offset-4 scale-105 shadow-xl'
+                    : 'hover:shadow-lg'
                 }`}
               >
-                {category}
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${
+                      activeCategory === category.name ? 'opacity-100' : 'opacity-80 group-hover:opacity-100'
+                    }`}
+                  />
+                  {/* Overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent transition-opacity duration-300 ${
+                    activeCategory === category.name ? 'opacity-90' : 'opacity-60 group-hover:opacity-80'
+                  }`} />
+                </div>
+
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                  <h3 className={`text-lg md:text-xl font-bold text-white transition-all duration-300 ${
+                    activeCategory === category.name ? 'scale-110' : ''
+                  }`}>
+                    {category.name}
+                  </h3>
+                  <div className={`w-8 h-1 bg-primary rounded-full mt-2 transition-all duration-300 transform ${
+                    activeCategory === category.name ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100'
+                  }`} />
+                </div>
               </button>
             ))}
           </div>
@@ -145,11 +210,11 @@ const Store: React.FC = () => {
 
           {/* Products Grid */}
           {!isLoading && !error && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
               {filteredProducts.map((product) => (
                 <div
                   key={product._id}
-                  className="group bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-strong transition-all duration-500 hover-lift"
+                  className="group bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-soft hover:shadow-strong transition-all duration-500 hover-lift"
                 >
                   {/* Image Container */}
                   <div className="relative aspect-square overflow-hidden">
@@ -162,23 +227,27 @@ const Store: React.FC = () => {
                     
                     {/* Featured Badge */}
                     {product.featured && (
-                      <div className="absolute top-4 left-4">
-                        <span className="badge badge-featured flex items-center gap-1">
-                          <Star className="w-3 h-3" />
-                          Featured
+                      <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
+                        <span className="badge badge-featured flex items-center gap-1 text-[10px] sm:text-xs px-1.5 py-0.5 sm:px-2.5 sm:py-1">
+                          <Star className="w-2.5 h-2.5 sm:w-3 h-3" />
+                          <span className="hidden xs:inline">Featured</span>
                         </span>
                       </div>
                     )}
                     
                     {/* Category Badge */}
-                    <div className="absolute top-4 right-4">
-                      <span className="badge badge-primary">{product.category}</span>
+                    <div className="absolute top-2 right-2 sm:top-4 sm:right-4">
+                      <span className="badge badge-primary text-[10px] sm:text-xs px-1.5 py-0.5 sm:px-2.5 sm:py-1">
+                        {product.category}
+                      </span>
                     </div>
                     
-                    {/* Quick Action Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-6">
+                    {/* Quick Action Overlay (Hidden on Mobile) */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hidden sm:flex items-end justify-center pb-6">
                       <a
-                        href="/contact"
+                        href={getWhatsAppLink(product.name)}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary font-semibold rounded-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg"
                       >
                         <ShoppingBag className="w-4 h-4" />
@@ -188,34 +257,36 @@ const Store: React.FC = () => {
                   </div>
                   
                   {/* Content */}
-                  <div className="p-5">
+                  <div className="p-3 sm:p-5">
                     {/* Rating */}
-                    <div className="flex items-center gap-1 mb-2">
+                    <div className="flex items-center gap-0.5 sm:gap-1 mb-1 sm:mb-2">
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`w-4 h-4 ${
+                          className={`w-3 h-3 sm:w-4 sm:h-4 ${
                             i < Math.floor(product.rating)
                               ? 'fill-accent-yellow text-accent-yellow'
                               : 'text-gray-300'
                           }`}
                         />
                       ))}
-                      <span className="text-sm text-gray-500 ml-1">{product.rating}</span>
+                      <span className="text-[10px] sm:text-sm text-gray-500 ml-0.5 sm:ml-1">{product.rating}</span>
                     </div>
                     
-                    <h3 className="font-semibold text-navy mb-2 group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                    <h3 className="font-semibold text-navy mb-1 sm:mb-2 group-hover:text-primary transition-colors duration-300 line-clamp-2 text-sm sm:text-base leading-tight">
                       {product.name}
                     </h3>
                     
-                    <div className="flex items-center justify-between">
-                      <span className="text-lg font-bold gradient-text">{formatPrice(product.price)}</span>
+                    <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-1 mt-auto">
+                      <span className="text-sm sm:text-lg font-bold gradient-text whitespace-nowrap">{formatPrice(product.price)}</span>
                       <a
-                        href="/contact"
-                        className="inline-flex items-center gap-1 text-primary font-medium text-sm group-hover:gap-2 transition-all duration-300"
+                        href={getWhatsAppLink(product.name)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-primary font-medium text-[11px] sm:text-sm group-hover:gap-2 transition-all duration-300"
                       >
                         Details
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                       </a>
                     </div>
                   </div>
@@ -287,7 +358,7 @@ const Store: React.FC = () => {
                   Contact Our Team
                 </a>
                 <a
-                  href="https://wa.me/1234567890"
+                  href="https://wa.me/2349136030440?text=Hello!%20I%20would%20like%20to%20get%20a%20quick%20quote."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-accent-yellow to-amber-500 text-navy font-semibold rounded-lg hover:shadow-lg transition-all duration-300"

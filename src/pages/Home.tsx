@@ -23,24 +23,49 @@ const heroSlides = [
     image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1920&q=80',
     headline: 'Powering Your Future with Excellence',
     subheadline: 'Premium electrical and engineering solutions for homes and businesses. Experience the difference of working with certified professionals.',
+    ctaText: 'Get Started',
+    ctaLink: '/services'
   },
   {
     id: 2,
     image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920&q=80',
     headline: 'Sustainable Energy Solutions',
     subheadline: 'Harness the power of the sun with our state-of-the-art solar installations. Reduce costs and your carbon footprint.',
+    ctaText: 'View Solar Solutions',
+    ctaLink: '/services'
   },
   {
     id: 3,
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80',
     headline: 'Smart Security Systems',
     subheadline: 'Protect what matters most with advanced CCTV and security solutions. 24/7 monitoring for complete peace of mind.',
+    ctaText: 'Secure Your Home',
+    ctaLink: '/services'
+  },
+  {
+    id: 5,
+    image: '/images/engineering_store_hero.png',
+    headline: 'The BuildersHubb Store',
+    subheadline: 'Your one-stop shop for premium electrical components, solar equipment, and professional engineering tools.',
+    ctaText: 'Shop Now',
+    ctaLink: '/store'
+  },
+  {
+    id: 6,
+    image: '/images/engineering_academy_hero.png',
+    headline: 'The BuildersHubb Academy',
+    subheadline: 'Join our professional training programs. Master solar installations, electrical engineering, and smart home automation.',
+    ctaText: 'Chat on WhatsApp',
+    ctaLink: 'https://wa.me/2349136030440?text=Hello!%20I%20am%20interested%20in%20joining%20the%20Academy%20for%20training.',
+    isExternal: true
   },
   {
     id: 4,
     image: 'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?w=1920&q=80',
     headline: 'Smart Home Automation',
     subheadline: 'Transform your living space with intelligent automation. Control your home from anywhere in the world.',
+    ctaText: 'Explore Smart Living',
+    ctaLink: '/services'
   },
 ];
 

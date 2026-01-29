@@ -3,7 +3,7 @@ import axios from 'axios';
 const production_url='https://thebuilders-server.onrender.com/api';
 const local_url='http://localhost:3000/api' 
 
-const API_BASE_URL = production_url || local_url
+const API_BASE_URL = local_url
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -60,6 +60,22 @@ export const productsApi = {
     }),
   delete: (id: string) => api.delete(`/products/${id}`),
   seed: () => api.post('/products/seed'),
+};
+
+// Category types
+export type Category = {
+  _id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+// Categories API
+export const categoriesApi = {
+  getAll: () => api.get<Category[]>('/categories'),
+  create: (name: string) => api.post<Category>('/categories', { name }),
+  delete: (id: string) => api.delete(`/categories/${id}`),
+  seed: () => api.post('/categories/seed'),
 };
 
 // Gallery types

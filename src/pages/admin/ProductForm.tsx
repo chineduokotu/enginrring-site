@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Upload, X, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
-import { productsApi } from '../../services/api';
-import type { Product } from '../../services/api';
-
-const categories = ['Electrical', 'Solar', 'Security', 'Smart Home'];
+import { productsApi, categoriesApi } from '../../services/api';
+import type { Product, Category } from '../../services/api';
 
 interface ImagePreview {
   file?: File;
@@ -23,7 +21,7 @@ const ProductForm: React.FC = () => {
     name: '',
     price: '',
     description: '',
-    category: categories[0],
+    category: '',
     featured: false,
     rating: '0',
   });
@@ -33,8 +31,22 @@ const ProductForm: React.FC = () => {
   const [isFetching, setIsFetching] = useState(isEditing);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await categoriesApi.getAll();
+        setCategories(response.data);
+        if (!isEditing && response.data.length > 0) {
+          setFormData(prev => ({ ...prev, category: response.data[0].name }));
+        }
+      } catch (err) {
+        console.error('Failed to fetch categories:', err);
+      }
+    };
+    fetchCategories();
+
     if (isEditing) {
       const fetchProduct = async () => {
         try {
@@ -252,8 +264,8 @@ const ProductForm: React.FC = () => {
                 className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-sm sm:text-base"
               >
                 {categories.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
+                  <option key={cat._id} value={cat.name}>
+                    {cat.name}
                   </option>
                 ))}
               </select>

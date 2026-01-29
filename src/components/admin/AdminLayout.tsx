@@ -8,7 +8,8 @@ import {
   Menu,
   X,
   Store,
-  Wrench
+  Wrench,
+  ListTree
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -37,6 +38,7 @@ const AdminLayout: React.FC = () => {
   const navItems = [
     { path: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/admin/products', icon: Package, label: 'Products' },
+    { path: '/admin/categories', icon: ListTree, label: 'Categories' },
     { path: '/admin/services', icon: Wrench, label: 'Services' },
     { path: '/admin/gallery', icon: Image, label: 'Gallery' },
   ];
