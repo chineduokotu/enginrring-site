@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Upload, Trash2, Loader2, AlertCircle, CheckCircle, Image as ImageIcon, Film, X } from 'lucide-react';
 import { galleryApi } from '../../services/api';
 import type { GalleryItem } from '../../services/api';
@@ -14,7 +14,7 @@ const GalleryManagement: React.FC = () => {
   const [success, setSuccess] = useState('');
   const [deleteTarget, setDeleteTarget] = useState<GalleryItem | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
-  
+
   // Upload form state
   const [showUploadForm, setShowUploadForm] = useState(false);
   const [uploadData, setUploadData] = useState({
@@ -97,7 +97,7 @@ const GalleryManagement: React.FC = () => {
 
   const handleDelete = async () => {
     if (!deleteTarget) return;
-    
+
     setIsDeleting(true);
     try {
       await galleryApi.delete(deleteTarget._id);
