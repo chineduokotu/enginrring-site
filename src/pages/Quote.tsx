@@ -191,15 +191,15 @@ const Quote: React.FC = () => {
                             {/* Contact Info */}
                             <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-8 text-white shadow-lg overflow-hidden relative">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2" />
-                                <h3 className="text-xl font-bold mb-6 relative z-10">Direct Contact</h3>
+                                <h3 className="text-xl font-bold mb-6 relative z-10 text-white">Direct Contact</h3>
                                 <div className="space-y-4 relative z-10">
-                                    <a href="tel:09136030440" className="flex items-center gap-4 hover:bg-white/10 p-2 rounded-lg transition-colors">
-                                        <Phone className="w-5 h-5" />
-                                        <span>09136030440</span>
+                                    <a href="tel:09136030440" className="flex items-center gap-4 hover:bg-white/10 p-2 rounded-lg transition-colors text-white">
+                                        <Phone className="w-5 h-5 text-white" />
+                                        <span className="text-white">09136030440</span>
                                     </a>
-                                    <a href="mailto:info@thebuildershubb.com" className="flex items-center gap-4 hover:bg-white/10 p-2 rounded-lg transition-colors">
-                                        <Mail className="w-5 h-5" />
-                                        <span className="text-sm">info@thebuildershubb.com</span>
+                                    <a href="mailto:info@thebuildershubb.com" className="flex items-center gap-4 hover:bg-white/10 p-2 rounded-lg transition-colors text-white">
+                                        <Mail className="w-5 h-5 text-white" />
+                                        <span className="text-sm text-white">info@thebuildershubb.com</span>
                                     </a>
                                 </div>
                             </div>

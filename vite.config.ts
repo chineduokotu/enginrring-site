@@ -12,10 +12,10 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['vite.svg', 'screenshot.jpg'],
       manifest: {
-        name: 'PowerTech Engineering',
-        short_name: 'PowerTech',
+        name: 'The BuildersHubb',
+        short_name: 'The BuildersHubb',
         description:
-          'Premium electrical, solar, CCTV, and smart home solutions. Professional installation services with industry-leading warranties.',
+          'The BuildersHubb - Premium electrical, solar, CCTV, and smart home solutions. Professional installation services with industry-leading warranties.',
         theme_color: '#0f172a',
         background_color: '#ffffff',
         display: 'standalone',
@@ -23,9 +23,9 @@ export default defineConfig({
         start_url: '/',
         icons: [
           {
-            src: '/vite.svg',
+            src: '/logo.jpeg',
             sizes: 'any',
-            type: 'image/svg+xml',
+            type: 'image/jpeg',
             purpose: 'any maskable',
           },
         ],
