@@ -21,8 +21,8 @@ const contactMethods = [
   {
     icon: MapPin,
     title: 'Address',
-    value: 'No 1 Efe Amenze Way, Arougba',
-    href: 'https://www.google.com/maps/search/No+1+Efe+Amenze+Way+Arougba+Airport+Road+Irhirhi+Benin+City+Nigeria',
+    value: 'No 1 Efe Amenze way, Block 12 Pat Ugua complex , Arougba',
+    href: 'https://www.google.com/maps/search/No+1+Efe+Amenze+way+Block+12+Pat+Ugua+complex+Arougba',
     description: 'Visit our headquarters',
     color: 'from-amber-500 to-orange-500',
   },
@@ -54,11 +54,11 @@ const Contact: React.FC = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/90 to-navy/80" />
         </div>
-        
+
         {/* Decorative Elements */}
         <div className="absolute top-20 right-10 w-72 h-72 blob-decoration blob-primary" />
         <div className="absolute bottom-10 left-20 w-48 h-48 blob-decoration blob-yellow" />
-        
+
         <div className="container-custom relative z-10 px-4 sm:px-6">
           <div className="max-w-3xl">
             <span className="badge badge-primary mb-6">Contact Us</span>
@@ -156,7 +156,7 @@ const Contact: React.FC = () => {
                 {/* Decorative Elements */}
                 <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
-                
+
                 <div className="relative z-10">
                   <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-full mb-6">
                     <MessageCircle className="w-10 h-10 text-white" />
@@ -194,7 +194,7 @@ const Contact: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-navy/20 flex items-center justify-center">
                     <a
-                      href="https://www.google.com/maps/search/No+1+Efe+Amenze+Way+Arougba+Airport+Road+Irhirhi+Benin+City+Nigeria"
+                      href="https://www.google.com/maps/search/No+1+Efe+Amenze+way+Block+12+Pat+Ugua+complex+Arougba"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
@@ -206,7 +206,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="p-5">
                   <h3 className="font-semibold text-navy mb-1">The BuildersHubb</h3>
-                  <p className="text-gray-600">No 1 Efe Amenze Way, Arougba, Off Airport Road, Irhirhi Shop 12</p>
+                  <p className="text-gray-600">No 1 Efe Amenze way, Block 12 Pat Ugua complex , Arougba</p>
                 </div>
               </div>
             </div>
@@ -250,7 +250,7 @@ const Contact: React.FC = () => {
       <section className="py-16 md:py-20 bg-gradient-to-r from-accent-red to-red-600 relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-        
+
         <div className="container-custom relative z-10 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Need Emergency Assistance?

@@ -21,7 +21,7 @@ const Privacy: React.FC = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/90 to-navy/85" />
         </div>
-        
+
         <div className="container-custom relative z-10 px-4 sm:px-6">
           <div className="max-w-3xl">
             <span className="badge badge-primary mb-6">Legal</span>
@@ -177,7 +177,7 @@ const Privacy: React.FC = () => {
                 <ul>
                   <li><strong>Email:</strong> privacy@powertech.com</li>
                   <li><strong>Phone:</strong> 09136030440</li>
-                  <li><strong>Address:</strong> No 1 Efe Amenze Way, Arougba, Off Airport Road, Irhirhi Shop 12</li>
+                  <li><strong>Address:</strong> No 1 Efe Amenze way, Block 12 Pat Ugua complex , Arougba</li>
                 </ul>
               </div>
             </div>

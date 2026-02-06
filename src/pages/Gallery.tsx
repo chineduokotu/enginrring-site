@@ -53,9 +53,9 @@ const Gallery: React.FC = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/90 to-navy/80" />
         </div>
-        
+
         <div className="absolute top-20 right-10 w-72 h-72 blob-decoration blob-primary" />
-        
+
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
             <span className="badge badge-primary mb-6">Our Work</span>
@@ -79,11 +79,10 @@ const Gallery: React.FC = () => {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  activeCategory === category
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeCategory === category
                     ? 'bg-gradient-to-r from-primary to-primary-dark text-white shadow-lg shadow-primary/25 scale-105'
                     : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-primary/30'
-                }`}
+                  }`}
               >
                 {category}
               </button>
@@ -107,7 +106,7 @@ const Gallery: React.FC = () => {
 
           {/* Gallery Grid */}
           {!isLoading && !error && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-4 gap-2 sm:gap-6">
               {filteredItems.map((item) => (
                 <div
                   key={item._id}
@@ -139,22 +138,22 @@ const Gallery: React.FC = () => {
                       />
                     )}
                   </div>
-                  
+
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6">
-                    <span className="badge badge-primary mb-3 self-start">{item.category}</span>
-                    <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-gray-300 text-sm">{item.description}</p>
-                    
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-2 sm:p-6">
+                    <span className="badge badge-primary mb-1 sm:mb-3 self-start text-[8px] sm:text-xs px-1 py-0 sm:px-2.5 sm:py-1">{item.category}</span>
+                    <h3 className="text-[10px] sm:text-xl font-bold text-white mb-0.5 sm:mb-2 line-clamp-1">{item.title}</h3>
+                    <p className="text-gray-300 text-[8px] sm:text-sm line-clamp-1 hidden xs:block">{item.description}</p>
+
                     {/* View Icon */}
-                    <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                      <ZoomIn className="w-6 h-6 text-white" />
+                    <div className="absolute top-2 right-2 sm:top-4 sm:right-4 w-6 h-6 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      <ZoomIn className="w-3 h-3 sm:w-6 sm:h-6 text-white" />
                     </div>
                   </div>
-                  
+
                   {/* Category Badge (always visible) */}
-                  <div className="absolute top-4 left-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                    <span className="badge badge-primary">{item.category}</span>
+                  <div className="absolute top-2 left-2 sm:top-4 sm:left-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                    <span className="badge badge-primary text-[8px] sm:text-xs px-1 py-0 sm:px-2.5 sm:py-1">{item.category}</span>
                   </div>
                 </div>
               ))}
@@ -216,16 +215,16 @@ const Gallery: React.FC = () => {
           >
             <X className="w-6 h-6 text-white" />
           </button>
-          
+
           <div
-            className="max-w-5xl w-full bg-white rounded-2xl overflow-hidden shadow-strong"
+            className="w-full h-full max-w-[95vw] max-h-[90vh] bg-white rounded-2xl overflow-hidden shadow-strong flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative">
+            <div className="relative flex-grow bg-black flex items-center justify-center">
               {selectedItem.mediaType === 'video' ? (
                 <video
                   src={selectedItem.url}
-                  className="w-full max-h-[60vh] object-contain bg-black"
+                  className="w-full h-full max-h-[75vh] object-contain"
                   controls
                   autoPlay
                 />
@@ -233,23 +232,23 @@ const Gallery: React.FC = () => {
                 <img
                   src={selectedItem.url}
                   alt={selectedItem.title}
-                  className="w-full max-h-[60vh] object-cover"
+                  className="w-full h-full max-h-[75vh] object-contain"
                 />
               )}
             </div>
-            <div className="p-6 md:p-8">
-              <div className="flex items-center justify-between mb-4">
+            <div className="p-4 sm:p-6 md:p-8 bg-white">
+              <div className="flex items-center justify-between mb-2 sm:mb-4">
                 <span className="badge badge-primary">{selectedItem.category}</span>
                 <a
                   href="/contact"
-                  className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-300"
+                  className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-300 text-sm sm:text-base"
                 >
                   Request Similar Project
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-navy mb-3">{selectedItem.title}</h2>
-              <p className="text-gray-600 text-lg">{selectedItem.description}</p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-navy mb-1 sm:mb-3">{selectedItem.title}</h2>
+              <p className="text-gray-600 text-sm sm:text-base md:text-lg line-clamp-2 md:line-clamp-none">{selectedItem.description}</p>
             </div>
           </div>
         </div>

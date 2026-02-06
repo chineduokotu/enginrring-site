@@ -4,16 +4,16 @@ import logo from '../../assets/image/logo.jpeg';
 
 // Custom TikTok Icon component to match Lucide style
 const Tiktok = ({ className }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="24" 
-    height="24" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className={className}
   >
     <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
               <span className="font-bold text-xl">The BuildersHubb</span>
             </Link>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Premium engineering solutions for homes and businesses. 
+              Premium engineering solutions for homes and businesses.
               Delivering excellence in electrical, security, and energy systems.
             </p>
             {/* Social Links */}
@@ -143,7 +143,7 @@ const Footer: React.FC = () => {
               <li>
                 <div className="flex items-start gap-3 text-gray-400">
                   <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <span>No 1 Efe Amenze Way, Arougba,<br />Off Airport Road, Irhirhi Shop 12</span>
+                  <span>No 1 Efe Amenze way,<br />Block 12 Pat Ugua complex , Arougba</span>
                 </div>
               </li>
             </ul>

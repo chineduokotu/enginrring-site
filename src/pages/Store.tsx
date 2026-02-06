@@ -18,7 +18,7 @@ const Store: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const [categories, setCategories] = useState<{name: string, image: string}[]>([]);
+  const [categories, setCategories] = useState<{ name: string, image: string }[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,14 +27,14 @@ const Store: React.FC = () => {
           productsApi.getAll(),
           categoriesApi.getAll()
         ]);
-        
+
         setProducts(productsRes.data);
-        
+
         const dynamicCategories = categoriesRes.data.map(cat => ({
           name: cat.name,
           image: categoryImages[cat.name] || defaultCategoryImage
         }));
-        
+
         setCategories([
           { name: 'All', image: categoryImages['All'] },
           ...dynamicCategories
@@ -56,7 +56,7 @@ const Store: React.FC = () => {
   const featuredProducts = products.filter((p) => p.featured);
 
   const formatPrice = (price: number) => {
-    return `From ₦${price.toLocaleString()}`;
+    return ` ₦${price.toLocaleString()}`;
   };
 
   const getWhatsAppLink = (productName: string) => {
@@ -77,10 +77,10 @@ const Store: React.FC = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/90 to-navy/80" />
         </div>
-        
+
         <div className="absolute top-20 right-10 w-72 h-72 blob-decoration blob-primary" />
         <div className="absolute bottom-10 left-20 w-48 h-48 blob-decoration blob-yellow" />
-        
+
         <div className="container-custom relative z-10 px-4 sm:px-6">
           <div className="max-w-3xl">
             <span className="badge badge-primary mb-6">Our Store</span>
@@ -101,7 +101,7 @@ const Store: React.FC = () => {
           <div className="container-custom">
             <div className="bg-gradient-to-r from-primary to-primary-dark rounded-2xl p-6 md:p-8 overflow-hidden relative">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-              
+
               <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
@@ -112,7 +112,7 @@ const Store: React.FC = () => {
                     <p className="text-white/80">Top-rated items with special offers</p>
                   </div>
                 </div>
-                
+
                 <div className="flex gap-3 flex-wrap justify-center">
                   {featuredProducts.slice(0, 3).map((product) => (
                     <a
@@ -157,37 +157,32 @@ const Store: React.FC = () => {
               <button
                 key={category.name}
                 onClick={() => setActiveCategory(category.name)}
-                className={`group relative aspect-[4/3] rounded-2xl overflow-hidden transition-all duration-500 hover-lift ${
-                  activeCategory === category.name
-                    ? 'ring-4 ring-primary ring-offset-4 scale-105 shadow-xl'
-                    : 'hover:shadow-lg'
-                }`}
+                className={`group relative aspect-[4/3] rounded-2xl overflow-hidden transition-all duration-500 hover-lift ${activeCategory === category.name
+                  ? 'ring-4 ring-primary ring-offset-4 scale-105 shadow-xl'
+                  : 'hover:shadow-lg'
+                  }`}
               >
                 {/* Background Image */}
                 <div className="absolute inset-0">
                   <img
                     src={category.image}
                     alt={category.name}
-                    className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${
-                      activeCategory === category.name ? 'opacity-100' : 'opacity-80 group-hover:opacity-100'
-                    }`}
+                    className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${activeCategory === category.name ? 'opacity-100' : 'opacity-80 group-hover:opacity-100'
+                      }`}
                   />
                   {/* Overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent transition-opacity duration-300 ${
-                    activeCategory === category.name ? 'opacity-90' : 'opacity-60 group-hover:opacity-80'
-                  }`} />
+                  <div className={`absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent transition-opacity duration-300 ${activeCategory === category.name ? 'opacity-90' : 'opacity-60 group-hover:opacity-80'
+                    }`} />
                 </div>
 
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-                  <h3 className={`text-lg md:text-xl font-bold text-white transition-all duration-300 ${
-                    activeCategory === category.name ? 'scale-110' : ''
-                  }`}>
+                  <h3 className={`text-lg md:text-xl font-bold text-white transition-all duration-300 ${activeCategory === category.name ? 'scale-110' : ''
+                    }`}>
                     {category.name}
                   </h3>
-                  <div className={`w-8 h-1 bg-primary rounded-full mt-2 transition-all duration-300 transform ${
-                    activeCategory === category.name ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100'
-                  }`} />
+                  <div className={`w-8 h-1 bg-primary rounded-full mt-2 transition-all duration-300 transform ${activeCategory === category.name ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-100'
+                    }`} />
                 </div>
               </button>
             ))}
@@ -224,7 +219,7 @@ const Store: React.FC = () => {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
-                    
+
                     {/* Featured Badge */}
                     {product.featured && (
                       <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
@@ -234,14 +229,14 @@ const Store: React.FC = () => {
                         </span>
                       </div>
                     )}
-                    
+
                     {/* Category Badge */}
                     <div className="absolute top-2 right-2 sm:top-4 sm:right-4">
                       <span className="badge badge-primary text-[10px] sm:text-xs px-1.5 py-0.5 sm:px-2.5 sm:py-1">
                         {product.category}
                       </span>
                     </div>
-                    
+
                     {/* Quick Action Overlay (Hidden on Mobile) */}
                     <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hidden sm:flex items-end justify-center pb-6">
                       <a
@@ -255,7 +250,7 @@ const Store: React.FC = () => {
                       </a>
                     </div>
                   </div>
-                  
+
                   {/* Content */}
                   <div className="p-3 sm:p-5">
                     {/* Rating */}
@@ -263,20 +258,19 @@ const Store: React.FC = () => {
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`w-3 h-3 sm:w-4 sm:h-4 ${
-                            i < Math.floor(product.rating)
-                              ? 'fill-accent-yellow text-accent-yellow'
-                              : 'text-gray-300'
-                          }`}
+                          className={`w-3 h-3 sm:w-4 sm:h-4 ${i < Math.floor(product.rating)
+                            ? 'fill-accent-yellow text-accent-yellow'
+                            : 'text-gray-300'
+                            }`}
                         />
                       ))}
                       <span className="text-[10px] sm:text-sm text-gray-500 ml-0.5 sm:ml-1">{product.rating}</span>
                     </div>
-                    
+
                     <h3 className="font-semibold text-navy mb-1 sm:mb-2 group-hover:text-primary transition-colors duration-300 line-clamp-2 text-sm sm:text-base leading-tight">
                       {product.name}
                     </h3>
-                    
+
                     <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-1 mt-auto">
                       <span className="text-sm sm:text-lg font-bold gradient-text whitespace-nowrap">{formatPrice(product.price)}</span>
                       <a
@@ -322,7 +316,7 @@ const Store: React.FC = () => {
               </div>
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/10 rounded-2xl hidden lg:block" />
             </div>
-            
+
             {/* Content */}
             <div>
               <span className="badge badge-primary mb-4">Expert Advice</span>

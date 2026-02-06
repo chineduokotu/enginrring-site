@@ -131,6 +131,19 @@ const Services: React.FC = () => {
     fetchServices();
   }, []);
 
+  // Handle scroll to hash
+  useEffect(() => {
+    if (!isLoading && window.location.hash) {
+      const id = window.location.hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [isLoading]);
+
   // Generate WhatsApp link for a service
   const getWhatsAppLink = (service: Service) => {
     const cleanNumber = service.whatsappNumber.replace(/[^0-9]/g, '');
@@ -141,6 +154,17 @@ const Services: React.FC = () => {
   // Get dynamic icon component
   const getIcon = (iconName: string) => {
     return iconMap[iconName] || Zap;
+  };
+
+  const getServiceId = (name: string) => {
+    const names: Record<string, string> = {
+      'Electrical Installation': 'electrical',
+      'CCTV Installation & Security Systems': 'security',
+      'Solar Energy Solutions': 'solar',
+      'Smart Home Automation': 'smarthome',
+      'Electric Fencing & Perimeter Security': 'fencing',
+    };
+    return names[name] || name.toLowerCase().replace(/[^a-z0-9]/g, '-');
   };
 
   return (
@@ -156,11 +180,11 @@ const Services: React.FC = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/85 to-navy/70" />
         </div>
-        
+
         {/* Decorative Elements */}
         <div className="absolute top-20 right-10 w-72 h-72 blob-decoration blob-primary" />
         <div className="absolute bottom-10 left-10 w-64 h-64 blob-decoration blob-yellow" />
-        
+
         <div className="container-custom relative z-10 px-4 sm:px-6">
           <div className="max-w-3xl">
             <span className="badge badge-primary mb-6">
@@ -195,11 +219,11 @@ const Services: React.FC = () => {
               {services.map((service, index) => {
                 const IconComponent = getIcon(service.icon);
                 return (
-                  <div 
+                  <div
                     key={service._id}
-                    className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${
-                      index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-                    }`}
+                    id={getServiceId(service.name)}
+                    className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center scroll-mt-32 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                      }`}
                   >
                     {/* Image */}
                     <div className={`relative ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
@@ -212,7 +236,7 @@ const Services: React.FC = () => {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
-                      
+
                       {/* Floating Badge */}
                       <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-primary text-white rounded-xl p-4 md:p-6 shadow-xl hidden sm:block">
                         <IconComponent className="w-8 h-8 md:w-10 md:h-10" />
@@ -224,7 +248,7 @@ const Services: React.FC = () => {
                       <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/10 rounded-xl mb-5 lg:hidden">
                         <IconComponent className="w-7 h-7 text-primary" />
                       </div>
-                      
+
                       <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-navy mb-4">
                         {service.name}
                       </h2>
@@ -290,7 +314,7 @@ const Services: React.FC = () => {
                 {index < processSteps.length - 1 && (
                   <div className="hidden lg:block absolute top-10 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-transparent -z-10" />
                 )}
-                
+
                 <div className="card-enhanced hover-lift text-center">
                   <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary-dark text-white text-2xl font-bold mb-5 shadow-glow-primary">
                     {item.step}
@@ -311,7 +335,7 @@ const Services: React.FC = () => {
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
-            
+
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Need a Custom Solution?

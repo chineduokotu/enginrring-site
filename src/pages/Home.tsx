@@ -24,7 +24,7 @@ const heroSlides = [
     headline: 'Powering Your Future with Excellence',
     subheadline: 'Premium electrical and engineering solutions for homes and businesses. Experience the difference of working with certified professionals.',
     ctaText: 'Get Started',
-    ctaLink: '/services'
+    ctaLink: '/services#electrical'
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const heroSlides = [
     headline: 'Sustainable Energy Solutions',
     subheadline: 'Harness the power of the sun with our state-of-the-art solar installations. Reduce costs and your carbon footprint.',
     ctaText: 'View Solar Solutions',
-    ctaLink: '/services'
+    ctaLink: '/services#solar'
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ const heroSlides = [
     headline: 'Smart Security Systems',
     subheadline: 'Protect what matters most with advanced CCTV and security solutions. 24/7 monitoring for complete peace of mind.',
     ctaText: 'Secure Your Home',
-    ctaLink: '/services'
+    ctaLink: '/services#security'
   },
   {
     id: 5,
@@ -49,6 +49,14 @@ const heroSlides = [
     subheadline: 'Your one-stop shop for premium electrical components, solar equipment, and professional engineering tools.',
     ctaText: 'Shop Now',
     ctaLink: '/store'
+  },
+  {
+    id: 7,
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1920&q=80',
+    headline: 'Showcasing Our Engineering Excellence',
+    subheadline: 'Explore our portfolio of completed projects across electrical, solar, and security installations.',
+    ctaText: 'View Gallery',
+    ctaLink: '/gallery'
   },
   {
     id: 6,
@@ -65,7 +73,7 @@ const heroSlides = [
     headline: 'Smart Home Automation',
     subheadline: 'Transform your living space with intelligent automation. Control your home from anywhere in the world.',
     ctaText: 'Explore Smart Living',
-    ctaLink: '/services'
+    ctaLink: '/services#smarthome'
   },
 ];
 
@@ -121,7 +129,7 @@ const Home: React.FC = () => {
       <section className="py-20 md:py-28 bg-gray-50 relative overflow-hidden">
         {/* Background Decoration */}
         <div className="absolute top-0 right-0 w-96 h-96 blob-decoration blob-primary" />
-        
+
         <div className="container-custom relative z-10">
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -165,7 +173,7 @@ const Home: React.FC = () => {
       <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 grid-pattern opacity-30" />
-        
+
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {stats.map((stat) => (
@@ -262,7 +270,7 @@ const Home: React.FC = () => {
         {/* Decorative Elements */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
-        
+
         <div className="container-custom text-center relative z-10">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
             Ready to Start Your Project?
