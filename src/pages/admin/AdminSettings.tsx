@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { Lock, Save, AlertCircle, CheckCircle } from 'lucide-react';
 import { authApi } from '../../services/api';
 import Button from '../../components/common/Button';
@@ -156,3 +157,7 @@ const AdminSettings: React.FC = () => {
 };
 
 export default AdminSettings;
+
+
+
+

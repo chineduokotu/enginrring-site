@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ShoppingBag, Star, ArrowRight, Sparkles, Loader2, AlertCircle } from 'lucide-react';
 import { productsApi, categoriesApi } from '../services/api';
 import type { Product } from '../services/api';
@@ -369,3 +369,7 @@ const Store: React.FC = () => {
 };
 
 export default Store;
+
+
+
+

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { X, ZoomIn, ExternalLink, Loader2, AlertCircle, Play } from 'lucide-react';
 import { galleryApi } from '../services/api';
 import type { GalleryItem } from '../services/api';
@@ -41,6 +41,19 @@ const Gallery: React.FC = () => {
     document.body.style.overflow = '';
   };
 
+  const getServiceHashForCategory = (category: string) => {
+    const normalized = category.trim().toLowerCase();
+    const map: Record<string, string> = {
+      electrical: 'electrical',
+      solar: 'solar',
+      security: 'security',
+      'smart home': 'smarthome',
+      'smart-home': 'smarthome',
+      smarthome: 'smarthome',
+    };
+    return map[normalized] ?? '';
+  };
+
   return (
     <div>
       {/* Hero Section */}
@@ -80,8 +93,8 @@ const Gallery: React.FC = () => {
                 key={category}
                 onClick={() => setActiveCategory(category)}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeCategory === category
-                    ? 'bg-gradient-to-r from-primary to-primary-dark text-white shadow-lg shadow-primary/25 scale-105'
-                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-primary/30'
+                  ? 'bg-gradient-to-r from-primary to-primary-dark text-white shadow-lg shadow-primary/25 scale-105'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-primary/30'
                   }`}
               >
                 {category}
@@ -106,14 +119,14 @@ const Gallery: React.FC = () => {
 
           {/* Gallery Grid */}
           {!isLoading && !error && (
-            <div className="grid grid-cols-4 gap-2 sm:gap-6">
+            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {filteredItems.map((item) => (
                 <div
                   key={item._id}
                   onClick={() => openLightbox(item)}
                   className="group relative rounded-2xl overflow-hidden shadow-soft hover:shadow-strong transition-all duration-500 cursor-pointer hover-lift"
                 >
-                  <div className="aspect-[4/3] overflow-hidden relative">
+                  <div className="aspect-[4/5] sm:aspect-[4/3] overflow-hidden relative">
                     {item.mediaType === 'video' ? (
                       <>
                         <video
@@ -240,7 +253,10 @@ const Gallery: React.FC = () => {
               <div className="flex items-center justify-between mb-2 sm:mb-4">
                 <span className="badge badge-primary">{selectedItem.category}</span>
                 <a
-                  href="/contact"
+                  href={`/services${getServiceHashForCategory(selectedItem.category)
+                    ? `#${getServiceHashForCategory(selectedItem.category)}`
+                    : ''
+                    }`}
                   className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-300 text-sm sm:text-base"
                 >
                   Request Similar Project
@@ -258,3 +274,7 @@ const Gallery: React.FC = () => {
 };
 
 export default Gallery;
+
+
+
+

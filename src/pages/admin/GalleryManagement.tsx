@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Upload, Trash2, Loader2, AlertCircle, CheckCircle, Image as ImageIcon, Film, X } from 'lucide-react';
 import { galleryApi } from '../../services/api';
 import type { GalleryItem } from '../../services/api';
@@ -329,3 +330,7 @@ const GalleryManagement: React.FC = () => {
 };
 
 export default GalleryManagement;
+
+
+
+

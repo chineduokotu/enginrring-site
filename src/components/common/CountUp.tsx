@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import * as React from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface CountUpProps {
   end: number;
@@ -85,4 +86,8 @@ const CountUp: React.FC<CountUpProps> = ({
 };
 
 export default CountUp;
+
+
+
+
 

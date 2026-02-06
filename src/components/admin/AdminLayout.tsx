@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Outlet, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, 
@@ -152,3 +152,6 @@ const AdminLayout: React.FC = () => {
 };
 
 export default AdminLayout;
+
+
+

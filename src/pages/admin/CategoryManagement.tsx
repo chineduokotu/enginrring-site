@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Plus, Trash2, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
 import { categoriesApi } from '../../services/api';
 import type { Category } from '../../services/api';
@@ -194,3 +195,7 @@ const CategoryManagement: React.FC = () => {
 };
 
 export default CategoryManagement;
+
+
+
+

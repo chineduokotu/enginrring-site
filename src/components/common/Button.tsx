@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { MessageCircle } from 'lucide-react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -85,3 +85,6 @@ const Button: React.FC<ButtonProps> = ({
 };
 
 export default Button;
+
+
+

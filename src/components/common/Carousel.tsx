@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import * as React from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Button from './Button';
 
@@ -145,3 +146,7 @@ const Carousel: React.FC<CarouselProps> = ({
 };
 
 export default Carousel;
+
+
+
+

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { X, AlertTriangle } from 'lucide-react';
 
 interface ConfirmDialogProps {
@@ -69,3 +69,6 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 };
 
 export default ConfirmDialog;
+
+
+

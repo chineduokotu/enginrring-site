@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Carousel from '../common/Carousel';
 
 interface HeroSlide {
@@ -24,3 +24,6 @@ const Hero: React.FC<HeroProps> = ({ slides }) => {
 };
 
 export default Hero;
+
+
+

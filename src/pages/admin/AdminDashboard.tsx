@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Package, Image, Plus, AlertCircle, Loader2, Lock, BookOpen, ListTree, Wrench, ShieldCheck, Store } from 'lucide-react';
 import { productsApi, galleryApi, servicesApi } from '../../services/api';
@@ -268,4 +269,8 @@ const AdminDashboard: React.FC = () => {
 };
 
 export default AdminDashboard;
+
+
+
+
 

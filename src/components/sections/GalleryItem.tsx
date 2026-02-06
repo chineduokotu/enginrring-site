@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { X, ZoomIn } from 'lucide-react';
 
 interface GalleryItemProps {
@@ -77,3 +78,7 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ image, title, category }) => 
 };
 
 export default GalleryItem;
+
+
+
+

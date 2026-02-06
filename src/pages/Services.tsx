@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Zap, Shield, Sun, Home as HomeIcon, Fence, ArrowRight, CheckCircle, Wrench, Settings, Loader2, AlertCircle } from 'lucide-react';
 import Button from '../components/common/Button';
 import { servicesApi } from '../services/api';
@@ -366,3 +366,6 @@ const Services: React.FC = () => {
 };
 
 export default Services;
+
+
+

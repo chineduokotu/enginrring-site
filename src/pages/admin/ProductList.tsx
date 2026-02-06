@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus, Edit2, Trash2, Loader2, AlertCircle, Package, Star, Download, CheckCircle } from 'lucide-react';
 import { productsApi } from '../../services/api';
@@ -278,3 +279,7 @@ const ProductList: React.FC = () => {
 };
 
 export default ProductList;
+
+
+
+

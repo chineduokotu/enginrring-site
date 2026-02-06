@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Plus, X, Loader2, AlertCircle, Save, Upload } from 'lucide-react';
 import { servicesApi } from '../../services/api';
@@ -443,3 +444,7 @@ const ServiceForm: React.FC = () => {
 };
 
 export default ServiceForm;
+
+
+
+

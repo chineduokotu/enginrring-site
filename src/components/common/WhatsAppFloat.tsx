@@ -29,3 +29,5 @@ const WhatsAppFloat: React.FC<WhatsAppFloatProps> = ({
 };
 
 export default WhatsAppFloat;
+
+

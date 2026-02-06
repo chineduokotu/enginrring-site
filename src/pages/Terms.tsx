@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { FileText, DollarSign, Shield, Scale } from 'lucide-react';
 
 const quickNav = [
@@ -171,3 +171,6 @@ const Terms: React.FC = () => {
 };
 
 export default Terms;
+
+
+

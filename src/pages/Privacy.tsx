@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Shield, Lock, Eye, FileText } from 'lucide-react';
 
 const quickNav = [
@@ -189,3 +189,6 @@ const Privacy: React.FC = () => {
 };
 
 export default Privacy;
+
+
+

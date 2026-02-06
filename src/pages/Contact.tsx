@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Phone, Mail, MapPin, Clock, MessageCircle, Headphones, Shield, Award } from 'lucide-react';
 
 const contactMethods = [
@@ -273,3 +273,6 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
+
+
+

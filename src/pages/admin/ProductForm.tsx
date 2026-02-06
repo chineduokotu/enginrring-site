@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Upload, X, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
 import { productsApi, categoriesApi } from '../../services/api';
@@ -309,7 +309,7 @@ const ProductForm: React.FC = () => {
             <label className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
               Product Images <span className="text-red-500">*</span>
             </label>
-            
+
             <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 mb-4">
               {images.map((img, index) => (
                 <div key={index} className="relative aspect-square rounded-lg overflow-hidden border border-gray-200 group">
@@ -327,7 +327,7 @@ const ProductForm: React.FC = () => {
                   </button>
                 </div>
               ))}
-              
+
               {/* Upload button */}
               <button
                 type="button"
@@ -374,3 +374,6 @@ const ProductForm: React.FC = () => {
 };
 
 export default ProductForm;
+
+
+
