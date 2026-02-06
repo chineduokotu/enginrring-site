@@ -59,8 +59,8 @@ const Store: React.FC = () => {
     return ` ₦${price.toLocaleString()}`;
   };
 
-  const getWhatsAppLink = (productName: string) => {
-    const message = encodeURIComponent(`Hello! I want this product: ${productName}`);
+  const getWhatsAppLink = (product: Product) => {
+    const message = encodeURIComponent(`Hello! I want this product: ${product.name} (ID: ${product.productId})`);
     return `https://wa.me/2349136030440?text=${message}`;
   };
 
@@ -117,7 +117,7 @@ const Store: React.FC = () => {
                   {featuredProducts.slice(0, 3).map((product) => (
                     <a
                       key={product._id}
-                      href={getWhatsAppLink(product.name)}
+                      href={getWhatsAppLink(product)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 hover:bg-white/20 transition-colors duration-300"
@@ -240,7 +240,7 @@ const Store: React.FC = () => {
                     {/* Quick Action Overlay (Hidden on Mobile) */}
                     <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hidden sm:flex items-end justify-center pb-6">
                       <a
-                        href={getWhatsAppLink(product.name)}
+                        href={getWhatsAppLink(product)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-white text-primary font-semibold rounded-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg"
@@ -274,12 +274,12 @@ const Store: React.FC = () => {
                     <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-1 mt-auto">
                       <span className="text-sm sm:text-lg font-bold gradient-text whitespace-nowrap">{formatPrice(product.price)}</span>
                       <a
-                        href={getWhatsAppLink(product.name)}
+                        href={getWhatsAppLink(product)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-primary font-medium text-[11px] sm:text-sm group-hover:gap-2 transition-all duration-300"
                       >
-                        Details
+                        Order Now!
                         <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                       </a>
                     </div>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Send } from 'lucide-react';
 import Button from '../common/Button';
 import logo from '../../assets/image/logo.jpeg';
 
@@ -69,20 +69,18 @@ const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-md py-3'
-            : 'bg-transparent py-5'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+          ? 'bg-white/95 backdrop-blur-md shadow-md py-3'
+          : 'bg-transparent py-5'
+          }`}
       >
         <div className="container-custom">
           <nav className="flex items-center justify-between">
             {/* Logo */}
             <Link
               to="/"
-              className={`flex items-center gap-2 font-bold text-xl transition-colors ${
-                isScrolled ? 'text-navy' : 'text-white'
-              }`}
+              className={`flex items-center gap-2 font-bold text-xl transition-colors ${isScrolled ? 'text-navy' : 'text-white'
+                }`}
             >
               <img src={logo} alt="Logo" className="w-10 h-10 rounded-lg object-cover" />
               <span>The BuildersHubb</span>
@@ -94,23 +92,20 @@ const Header: React.FC = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`font-medium transition-colors relative group ${
-                    isScrolled
-                      ? 'text-gray-700 hover:text-primary'
-                      : 'text-white/90 hover:text-white'
-                  } ${
-                    location.pathname === link.path
+                  className={`font-medium transition-colors relative group ${isScrolled
+                    ? 'text-gray-700 hover:text-primary'
+                    : 'text-white/90 hover:text-white'
+                    } ${location.pathname === link.path
                       ? isScrolled
                         ? 'text-primary'
                         : 'text-white'
                       : ''
-                  }`}
+                    }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
-                      location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
-                    }`}
+                    className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`}
                   />
                 </Link>
               ))}
@@ -119,46 +114,56 @@ const Header: React.FC = () => {
             {/* Desktop CTA */}
             <div className="hidden lg:block">
               <Button
-                variant="whatsapp"
+                variant="primary"
                 size="sm"
-                href="https://wa.me/2349136030440"
-                isExternal
+                to="/quote"
               >
                 Get Quote
               </Button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={handleMenuClick}
-              onTouchEnd={handleMenuTouch}
-              className={`lg:hidden p-2 rounded-lg transition-colors z-[60] ${
-                isScrolled
+            {/* Mobile Actions */}
+            <div className="flex lg:hidden items-center gap-2 z-[60]">
+              <Link
+                to="/quote"
+                className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition-all shadow-md ${isScrolled
+                  ? 'bg-primary text-white hover:bg-primary-dark'
+                  : 'bg-white text-primary hover:bg-gray-100'
+                  }`}
+              >
+                <Send className="w-4 h-4" />
+                <span>Quote</span>
+              </Link>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={handleMenuClick}
+                onTouchEnd={handleMenuTouch}
+                className={`p-2 rounded-lg transition-colors ${isScrolled
                   ? 'text-navy hover:bg-gray-100'
                   : 'text-white hover:bg-white/10'
-              }`}
-              style={{ touchAction: 'manipulation' }}
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+                  }`}
+                style={{ touchAction: 'manipulation' }}
+                aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              >
+                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </nav>
         </div>
       </header>
 
       {/* Mobile Menu Overlay - Outside header for proper fixed positioning */}
       <div
-        className={`fixed inset-0 bg-navy/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden z-[55] ${
-          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`fixed inset-0 bg-navy/50 backdrop-blur-sm transition-opacity duration-300 lg:hidden z-[55] ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
         onClick={() => setIsMenuOpen(false)}
       />
 
       {/* Mobile Menu Drawer - Outside header for proper fixed positioning */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 max-w-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden z-[60] ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`fixed top-0 right-0 h-full w-80 max-w-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden z-[60] ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
       >
         <div className="flex flex-col h-full">
           {/* Mobile Menu Header */}
@@ -182,11 +187,10 @@ const Header: React.FC = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`block px-6 py-3 font-medium transition-colors ${
-                  location.pathname === link.path
-                    ? 'text-primary bg-primary/5 border-r-4 border-primary'
-                    : 'text-gray-700 hover:text-primary hover:bg-gray-50'
-                }`}
+                className={`block px-6 py-3 font-medium transition-colors ${location.pathname === link.path
+                  ? 'text-primary bg-primary/5 border-r-4 border-primary'
+                  : 'text-gray-700 hover:text-primary hover:bg-gray-50'
+                  }`}
               >
                 {link.label}
               </Link>
@@ -196,10 +200,9 @@ const Header: React.FC = () => {
           {/* Mobile Menu CTA */}
           <div className="p-6 border-t border-gray-100">
             <Button
-              variant="whatsapp"
+              variant="primary"
               size="md"
-              href="https://wa.me/2349136030440"
-              isExternal
+              to="/quote"
               className="w-full"
             >
               Get Quote

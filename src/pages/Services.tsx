@@ -345,7 +345,7 @@ const Services: React.FC = () => {
                 tailored to your specific requirements. Get in touch for a consultation.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="secondary" size="lg" href="/contact">
+                <Button variant="secondary" size="lg" to="/quote">
                   Request a Quote
                 </Button>
                 <Button

@@ -33,7 +33,7 @@ const ProductList: React.FC = () => {
 
   const handleDelete = async () => {
     if (!deleteTarget) return;
-    
+
     setIsDeleting(true);
     try {
       await productsApi.delete(deleteTarget._id);
@@ -147,6 +147,7 @@ const ProductList: React.FC = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-gray-900 truncate">{product.name}</p>
+                    <p className="text-xs font-mono text-primary font-bold uppercase">{product.productId}</p>
                     <p className="text-sm text-gray-500 line-clamp-1">{product.description}</p>
                     <div className="flex flex-wrap items-center gap-2 mt-2">
                       <span className="px-2 py-0.5 text-xs bg-primary/10 text-primary rounded-full">
@@ -190,6 +191,7 @@ const ProductList: React.FC = () => {
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">ID</th>
                     <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Product</th>
                     <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Category</th>
                     <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Price</th>
@@ -200,6 +202,11 @@ const ProductList: React.FC = () => {
                 <tbody className="divide-y divide-gray-100">
                   {products.map((product) => (
                     <tr key={product._id} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-6 py-4">
+                        <span className="font-mono text-xs font-bold text-primary px-2 py-1 bg-primary/5 rounded border border-primary/10 uppercase">
+                          {product.productId}
+                        </span>
+                      </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-4">
                           <div className="w-14 h-14 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">

@@ -6,6 +6,7 @@ import Store from '../pages/Store';
 import Gallery from '../pages/Gallery';
 import About from '../pages/About';
 import Contact from '../pages/Contact';
+import Quote from '../pages/Quote';
 import Terms from '../pages/Terms';
 import Privacy from '../pages/Privacy';
 
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: 'contact',
         element: <Contact />,
+      },
+      {
+        path: 'quote',
+        element: <Quote />,
       },
       {
         path: 'terms',

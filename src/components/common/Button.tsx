@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { MessageCircle } from 'lucide-react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -6,6 +7,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
   href?: string;
+  to?: string;
   isExternal?: boolean;
 }
 
@@ -14,6 +16,7 @@ const Button: React.FC<ButtonProps> = ({
   size = 'md',
   children,
   href,
+  to,
   isExternal = false,
   className = '',
   ...props
@@ -61,6 +64,15 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   const combinedClassName = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`.trim();
+
+  if (to) {
+    return (
+      <Link to={to} className={combinedClassName}>
+        {variant === 'whatsapp' && <MessageCircle className="w-5 h-5" />}
+        {children}
+      </Link>
+    );
+  }
 
   if (href) {
     return (

@@ -35,6 +35,7 @@ export type ProductImage = {
 
 export type Product = {
   _id: string;
+  productId: string;
   name: string;
   price: number;
   description: string;

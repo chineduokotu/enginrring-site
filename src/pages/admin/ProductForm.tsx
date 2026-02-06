@@ -18,6 +18,7 @@ const ProductForm: React.FC = () => {
   const isEditing = !!id;
 
   const [formData, setFormData] = useState({
+    productId: '',
     name: '',
     price: '',
     description: '',
@@ -53,6 +54,7 @@ const ProductForm: React.FC = () => {
           const response = await productsApi.getById(id);
           const product: Product = response.data;
           setFormData({
+            productId: product.productId,
             name: product.name,
             price: product.price.toString(),
             description: product.description,
@@ -115,8 +117,8 @@ const ProductForm: React.FC = () => {
     setError('');
     setSuccess('');
 
-    if (!formData.name || !formData.price || !formData.category) {
-      setError('Please fill in all required fields');
+    if (!formData.productId || !formData.name || !formData.price || !formData.category) {
+      setError('Please fill in all required fields (Product ID, Name, Price, Category)');
       return;
     }
 
@@ -128,6 +130,7 @@ const ProductForm: React.FC = () => {
     setIsLoading(true);
     try {
       const data = new FormData();
+      data.append('productId', formData.productId);
       data.append('name', formData.name);
       data.append('price', formData.price);
       data.append('description', formData.description);
@@ -199,6 +202,21 @@ const ProductForm: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            {/* Product ID */}
+            <div>
+              <label htmlFor="productId" className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+                Product ID (SKU) <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="productId"
+                name="productId"
+                type="text"
+                value={formData.productId}
+                onChange={handleInputChange}
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-sm sm:text-base font-mono uppercase"
+                placeholder="e.g. ELEC-001"
+              />
+            </div>
             {/* Name */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
@@ -214,7 +232,9 @@ const ProductForm: React.FC = () => {
                 placeholder="Enter product name"
               />
             </div>
+          </div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {/* Price */}
             <div>
               <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
@@ -232,25 +252,7 @@ const ProductForm: React.FC = () => {
                 placeholder="₦0.00"
               />
             </div>
-          </div>
 
-          {/* Description */}
-          <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
-              Description
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              rows={3}
-              value={formData.description}
-              onChange={handleInputChange}
-              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors resize-none text-sm sm:text-base"
-              placeholder="Enter product description"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {/* Category */}
             <div>
               <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
@@ -270,7 +272,25 @@ const ProductForm: React.FC = () => {
                 ))}
               </select>
             </div>
+          </div>
 
+          {/* Description */}
+          <div>
+            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+              Description
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              rows={3}
+              value={formData.description}
+              onChange={handleInputChange}
+              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors resize-none text-sm sm:text-base"
+              placeholder="Enter product description"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {/* Rating */}
             <div>
               <label htmlFor="rating" className="block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
