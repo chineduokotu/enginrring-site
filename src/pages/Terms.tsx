@@ -157,7 +157,7 @@ const Terms: React.FC = () => {
                   For questions regarding these Terms and Conditions, please contact us:
                 </p>
                 <ul>
-                  <li><strong>Email:</strong> legal@thebuildershubb.com</li>
+                  <li><strong>Email:</strong> johnmudichristopher@gmail.com</li>
                   <li><strong>Phone:</strong> 09136030440</li>
                   <li><strong>Address:</strong> No 1 Efe Amenze way, Block 12 Pat Ugua complex , Arougba</li>
                 </ul>
@@ -171,6 +171,7 @@ const Terms: React.FC = () => {
 };
 
 export default Terms;
+
 
 
 

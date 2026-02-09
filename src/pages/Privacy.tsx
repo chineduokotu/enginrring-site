@@ -175,7 +175,7 @@ const Privacy: React.FC = () => {
                   If you have questions about this Privacy Policy or wish to exercise your rights, please contact us:
                 </p>
                 <ul>
-                  <li><strong>Email:</strong> privacy@thebuildershubb.com</li>
+                  <li><strong>Email:</strong> johnmudichristopher@gmail.com</li>
                   <li><strong>Phone:</strong> 09136030440</li>
                   <li><strong>Address:</strong> No 1 Efe Amenze way, Block 12 Pat Ugua complex , Arougba</li>
                 </ul>
@@ -189,6 +189,7 @@ const Privacy: React.FC = () => {
 };
 
 export default Privacy;
+
 
 
 

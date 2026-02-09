@@ -85,7 +85,7 @@ const Quote: React.FC = () => {
                                                 name="email"
                                                 required
                                                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
-                                                placeholder="john@example.com"
+                                                placeholder="johnmudichristopher@gmail.com"
                                             />
                                             <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-xs mt-1" />
                                         </div>
@@ -197,9 +197,9 @@ const Quote: React.FC = () => {
                                         <Phone className="w-5 h-5 text-white" />
                                         <span className="text-white">09136030440</span>
                                     </a>
-                                    <a href="mailto:info@thebuildershubb.com" className="flex items-center gap-4 hover:bg-white/10 p-2 rounded-lg transition-colors text-white">
+                                    <a href="mailto:johnmudichristopher@gmail.com" className="flex items-center gap-4 hover:bg-white/10 p-2 rounded-lg transition-colors text-white">
                                         <Mail className="w-5 h-5 text-white" />
-                                        <span className="text-sm text-white">info@thebuildershubb.com</span>
+                                        <span className="text-sm text-white">johnmudichristopher@gmail.com</span>
                                     </a>
                                 </div>
                             </div>
@@ -213,3 +213,4 @@ const Quote: React.FC = () => {
 };
 
 export default Quote;
+

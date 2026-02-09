@@ -133,11 +133,11 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="mailto:info@thebuildershubb.com"
+                  href="mailto:johnmudichristopher@gmail.com"
                   className="flex items-start gap-3 text-gray-400 hover:text-white transition-colors duration-300"
                 >
                   <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <span>info@thebuildershubb.com</span>
+                  <span>johnmudichristopher@gmail.com</span>
                 </a>
               </li>
               <li>
@@ -180,5 +180,6 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+
 
 

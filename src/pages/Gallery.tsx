@@ -119,7 +119,7 @@ const Gallery: React.FC = () => {
 
           {/* Gallery Grid */}
           {!isLoading && !error && (
-            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {filteredItems.map((item) => (
                 <div
                   key={item._id}
@@ -274,6 +274,7 @@ const Gallery: React.FC = () => {
 };
 
 export default Gallery;
+
 
 
 

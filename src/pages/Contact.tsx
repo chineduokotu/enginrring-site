@@ -13,8 +13,8 @@ const contactMethods = [
   {
     icon: Mail,
     title: 'Email',
-    value: 'info@thebuildershubb.com',
-    href: 'mailto:info@thebuildershubb.com',
+    value: 'johnmudichristopher@gmail.com',
+    href: 'mailto:johnmudichristopher@gmail.com',
     description: 'Send us an email anytime',
     color: 'from-green-500 to-emerald-500',
   },
@@ -235,7 +235,7 @@ const Contact: React.FC = () => {
                 Call Us Now
               </a>
               <a
-                href="mailto:info@thebuildershubb.com"
+                href="mailto:johnmudichristopher@gmail.com"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gray-100 text-navy font-semibold rounded-lg hover:bg-gray-200 transition-colors duration-300"
               >
                 <Mail className="w-5 h-5" />
@@ -273,6 +273,7 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
+
 
 
 

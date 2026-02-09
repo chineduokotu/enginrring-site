@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ShoppingBag, Star, ArrowRight, Sparkles, Loader2, AlertCircle } from 'lucide-react';
 import { productsApi, categoriesApi } from '../services/api';
 import type { Product } from '../services/api';
@@ -62,6 +62,15 @@ const Store: React.FC = () => {
   const getWhatsAppLink = (product: Product) => {
     const message = encodeURIComponent(`Hello! I want this product: ${product.name} (ID: ${product.productId})`);
     return `https://wa.me/2349136030440?text=${message}`;
+  };
+
+  const categoryScrollRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollCategories = (direction: 'left' | 'right') => {
+    const el = categoryScrollRef.current;
+    if (!el) return;
+    const amount = Math.max(180, Math.round(el.clientWidth * 0.7));
+    el.scrollBy({ left: direction === 'left' ? -amount : amount, behavior: 'smooth' });
   };
 
   return (
@@ -152,12 +161,32 @@ const Store: React.FC = () => {
             <div className="w-20 h-1.5 bg-primary rounded-full mx-auto" />
           </div>
           {/* Category Cards Filter */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-16">
+          <div className="relative">
+            <button
+              type="button"
+              aria-label="Scroll categories left"
+              onClick={() => scrollCategories('left')}
+              className="md:hidden absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/90 text-navy shadow flex items-center justify-center border border-gray-200"
+            >
+              <span aria-hidden="true">‹</span>
+            </button>
+            <button
+              type="button"
+              aria-label="Scroll categories right"
+              onClick={() => scrollCategories('right')}
+              className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/90 text-navy shadow flex items-center justify-center border border-gray-200"
+            >
+              <span aria-hidden="true">›</span>
+            </button>
+            <div
+              ref={categoryScrollRef}
+              className="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 mb-0 md:mx-0 md:px-0 md:pb-0 md:mb-16 md:grid md:grid-cols-3 lg:grid-cols-5 md:gap-6 md:overflow-visible scroll-smooth"
+            >
             {categories.map((category) => (
               <button
                 key={category.name}
                 onClick={() => setActiveCategory(category.name)}
-                className={`group relative aspect-[4/3] rounded-2xl overflow-hidden transition-all duration-500 hover-lift ${activeCategory === category.name
+                className={`group relative aspect-[4/3] rounded-2xl overflow-hidden transition-all duration-500 hover-lift flex-shrink-0 w-40 xs:w-48 sm:w-56 md:w-auto ${activeCategory === category.name
                   ? 'ring-4 ring-primary ring-offset-4 scale-105 shadow-xl'
                   : 'hover:shadow-lg'
                   }`}
@@ -186,6 +215,7 @@ const Store: React.FC = () => {
                 </div>
               </button>
             ))}
+            </div>
           </div>
 
           {/* Loading State */}
@@ -369,7 +399,3 @@ const Store: React.FC = () => {
 };
 
 export default Store;
-
-
-
-

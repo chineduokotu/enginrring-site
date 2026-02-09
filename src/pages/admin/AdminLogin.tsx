@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Lock, User, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
@@ -15,7 +14,7 @@ const AdminLogin: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
+
     if (!username || !password) {
       setError('Please enter username and password');
       return;
@@ -125,7 +124,4 @@ const AdminLogin: React.FC = () => {
 };
 
 export default AdminLogin;
-
-
-
 
