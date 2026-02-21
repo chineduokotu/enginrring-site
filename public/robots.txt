@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow admin routes
+Disallow: /admin/
+Disallow: /admin
+
+Sitemap: https://thebuildershubb.com/sitemap.xml
