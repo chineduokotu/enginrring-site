@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Facebook, Instagram } from 'lucide-react';
-import logo from '../../assets/image/logo.jpeg';
+import { Link } from "react-router-dom";
+import { Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react";
+import logo from "../../assets/image/logo.jpeg";
 
 // Custom TikTok Icon component to match Lucide style
 const Tiktok = ({ className }: { className?: string }) => (
@@ -21,26 +21,38 @@ const Tiktok = ({ className }: { className?: string }) => (
 );
 
 const quickLinks = [
-  { path: '/', label: 'Home' },
-  { path: '/services', label: 'Services' },
-  { path: '/store', label: 'Store' },
-  { path: '/gallery', label: 'Gallery' },
-  { path: '/about', label: 'About' },
-  { path: '/contact', label: 'Contact' },
+  { path: "/", label: "Home" },
+  { path: "/services", label: "Services" },
+  { path: "/store", label: "Store" },
+  { path: "/gallery", label: "Gallery" },
+  { path: "/about", label: "About" },
+  { path: "/contact", label: "Contact" },
 ];
 
 const services = [
-  { path: '/services', label: 'Electrical Installation' },
-  { path: '/services', label: 'CCTV & Security' },
-  { path: '/services', label: 'Solar Energy' },
-  { path: '/services', label: 'Smart Home' },
-  { path: '/services', label: 'Electric Fencing' },
+  { path: "/services", label: "Electrical Installation" },
+  { path: "/services", label: "CCTV & Security" },
+  { path: "/services", label: "Solar Energy" },
+  { path: "/services", label: "Smart Home" },
+  { path: "/services", label: "Electric Fencing" },
 ];
 
 const socialLinks = [
-  { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61550482598066', label: 'Facebook' },
-  { icon: Instagram, href: 'https://www.instagram.com/thebuildershubb?igsh=MTBramhzODY2MmVmdg==', label: 'Instagram' },
-  { icon: Tiktok, href: 'https://www.tiktok.com/@thebuildershubb', label: 'TikTok' },
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/profile.php?id=61550482598066",
+    label: "Facebook",
+  },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/thebuildershubb?igsh=MTBramhzODY2MmVmdg==",
+    label: "Instagram",
+  },
+  {
+    icon: Tiktok,
+    href: "https://www.tiktok.com/@thebuildershubb",
+    label: "TikTok",
+  },
 ];
 
 const Footer: React.FC = () => {
@@ -54,12 +66,16 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-6">
-              <img src={logo} alt="Logo" className="w-10 h-10 rounded-lg object-cover" />
+              <img
+                src={logo}
+                alt="Logo"
+                className="w-10 h-10 rounded-lg object-cover"
+              />
               <span className="font-bold text-xl">The BuildersHubb</span>
             </Link>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Premium engineering solutions for homes and businesses.
-              Delivering excellence in electrical, security, and energy systems.
+              Premium engineering solutions for homes and businesses. Delivering
+              excellence in electrical, security, and energy systems.
             </p>
             {/* Social Links */}
             <div className="flex gap-3">
@@ -90,14 +106,6 @@ const Footer: React.FC = () => {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  to="/admin/login"
-                  className="text-gray-400 hover:text-white transition-colors duration-300 inline-flex items-center gap-2"
-                >
-                  Panel <span className="text-red-500 text-xs">(admin only)</span>
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -143,7 +151,11 @@ const Footer: React.FC = () => {
               <li>
                 <div className="flex items-start gap-3 text-gray-400">
                   <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                  <span>No 1 Efe Amenze way,<br />Block 12 Pat Ugua complex , Arougba</span>
+                  <span>
+                    No 1 Efe Amenze way,
+                    <br />
+                    Block 12 Pat Ugua complex , Arougba
+                  </span>
                 </div>
               </li>
             </ul>
@@ -180,6 +192,3 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-
-
-
