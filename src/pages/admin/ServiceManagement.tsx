@@ -1,16 +1,26 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Plus, Edit2, Trash2, MessageCircle, AlertCircle, Loader2, ToggleLeft, ToggleRight, Download } from 'lucide-react';
-import { servicesApi } from '../../services/api';
-import type { Service } from '../../services/api';
+import * as React from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  Plus,
+  Edit2,
+  Trash2,
+  MessageCircle,
+  AlertCircle,
+  Loader2,
+  ToggleLeft,
+  ToggleRight,
+  Download,
+} from "lucide-react";
+import { servicesApi } from "../../services/api";
+import type { Service } from "../../services/api";
 
 const ServiceManagement: React.FC = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSeeding, setIsSeeding] = useState(false);
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
   const fetchServices = async () => {
@@ -18,9 +28,9 @@ const ServiceManagement: React.FC = () => {
       setIsLoading(true);
       const response = await servicesApi.getAllAdmin();
       setServices(response.data);
-      setError('');
+      setError("");
     } catch {
-      setError('Failed to load services');
+      setError("Failed to load services");
     } finally {
       setIsLoading(false);
     }
@@ -33,12 +43,14 @@ const ServiceManagement: React.FC = () => {
   const handleSeedServices = async () => {
     try {
       setIsSeeding(true);
-      setError('');
+      setError("");
       await servicesApi.seed();
-      setSuccessMessage('Default services loaded! You can now edit them to add specific WhatsApp numbers.');
+      setSuccessMessage(
+        "Default services loaded! You can now edit them to add specific WhatsApp numbers.",
+      );
       await fetchServices();
     } catch {
-      setError('Failed to load default services. They may already exist.');
+      setError("Failed to load default services. They may already exist.");
     } finally {
       setIsSeeding(false);
     }
@@ -47,21 +59,23 @@ const ServiceManagement: React.FC = () => {
   const handleToggleActive = async (service: Service) => {
     try {
       await servicesApi.update(service._id, { isActive: !service.isActive });
-      setServices(services.map(s => 
-        s._id === service._id ? { ...s, isActive: !s.isActive } : s
-      ));
+      setServices(
+        services.map((s) =>
+          s._id === service._id ? { ...s, isActive: !s.isActive } : s,
+        ),
+      );
     } catch {
-      setError('Failed to update service status');
+      setError("Failed to update service status");
     }
   };
 
   const handleDelete = async (id: string) => {
     try {
       await servicesApi.delete(id);
-      setServices(services.filter(s => s._id !== id));
+      setServices(services.filter((s) => s._id !== id));
       setDeleteId(null);
     } catch {
-      setError('Failed to delete service');
+      setError("Failed to delete service");
     }
   };
 
@@ -76,7 +90,9 @@ const ServiceManagement: React.FC = () => {
   return (
     <div>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <h1 className="text-xl sm:text-2xl font-bold text-navy">Manage Services</h1>
+        <h1 className="text-xl sm:text-2xl font-bold text-navy">
+          Manage Services
+        </h1>
         <Link
           to="/admin/services/new"
           className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors w-full sm:w-auto"
@@ -97,7 +113,12 @@ const ServiceManagement: React.FC = () => {
         <div className="mb-6 p-3 sm:p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3 text-green-700 text-sm sm:text-base">
           <MessageCircle className="w-5 h-5 flex-shrink-0" />
           <span className="flex-1">{successMessage}</span>
-          <button onClick={() => setSuccessMessage('')} className="text-green-600 hover:text-green-800 text-lg">×</button>
+          <button
+            onClick={() => setSuccessMessage("")}
+            className="text-green-600 hover:text-green-800 text-lg"
+          >
+            ×
+          </button>
         </div>
       )}
 
@@ -110,7 +131,11 @@ const ServiceManagement: React.FC = () => {
               disabled={isSeeding}
               className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
             >
-              {isSeeding ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
+              {isSeeding ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <Download className="w-5 h-5" />
+              )}
               Load Default Services
             </button>
             <Link
@@ -122,7 +147,8 @@ const ServiceManagement: React.FC = () => {
             </Link>
           </div>
           <p className="text-gray-400 text-sm mt-4 px-4">
-            Load default services to quickly set up, then edit each one to add specific WhatsApp numbers.
+            Load default services to quickly set up, then edit each one to add
+            specific WhatsApp numbers.
           </p>
         </div>
       ) : (
@@ -130,38 +156,55 @@ const ServiceManagement: React.FC = () => {
           {/* Mobile Card View */}
           <div className="block md:hidden space-y-4">
             {services.map((service) => (
-              <div key={service._id} className="bg-white rounded-xl shadow-soft p-4">
+              <div
+                key={service._id}
+                className="bg-white rounded-xl shadow-soft p-4"
+              >
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                     <MessageCircle className="w-5 h-5 text-primary" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
-                      <p className="font-medium text-navy truncate">{service.name}</p>
+                      <p className="font-medium text-navy truncate">
+                        {service.name}
+                      </p>
                       <button
                         onClick={() => handleToggleActive(service)}
                         className={`flex-shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${
                           service.isActive
-                            ? 'bg-green-100 text-green-700'
-                            : 'bg-gray-100 text-gray-500'
+                            ? "bg-green-100 text-green-700"
+                            : "bg-gray-100 text-gray-500"
                         }`}
                       >
                         {service.isActive ? (
-                          <><ToggleRight className="w-3 h-3" /> Active</>
+                          <>
+                            <ToggleRight className="w-3 h-3" /> Active
+                          </>
                         ) : (
-                          <><ToggleLeft className="w-3 h-3" /> Inactive</>
+                          <>
+                            <ToggleLeft className="w-3 h-3" /> Inactive
+                          </>
                         )}
                       </button>
                     </div>
-                    <p className="text-sm text-gray-500 line-clamp-2 mt-1">{service.description}</p>
+                    <p className="text-sm text-gray-500 line-clamp-2 mt-1">
+                      {service.description}
+                    </p>
                   </div>
                 </div>
 
                 <div className="mt-3 pt-3 border-t border-gray-100 space-y-2">
                   <div className="flex items-center gap-2 text-sm">
+                    <span className="text-gray-500">Created On:</span>
+                    <span className="text-gray-700">
+                      {new Date(service.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
                     <span className="text-gray-500">WhatsApp:</span>
-                    <a 
-                      href={`https://wa.me/${service.whatsappNumber.replace(/[^0-9]/g, '')}`}
+                    <a
+                      href={`https://wa.me/${service.whatsappNumber.replace(/[^0-9]/g, "")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-600 hover:underline flex items-center gap-1"
@@ -173,7 +216,9 @@ const ServiceManagement: React.FC = () => {
                   {service.whatsappContactName && (
                     <div className="flex items-center gap-2 text-sm">
                       <span className="text-gray-500">Contact:</span>
-                      <span className="text-gray-700">{service.whatsappContactName}</span>
+                      <span className="text-gray-700">
+                        {service.whatsappContactName}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -204,11 +249,24 @@ const ServiceManagement: React.FC = () => {
               <table className="w-full">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Service</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">WhatsApp Number</th>
-                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">Contact Person</th>
-                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-600">Status</th>
-                    <th className="px-6 py-4 text-right text-sm font-semibold text-gray-600">Actions</th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+                      Service
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+                      WhatsApp Number
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+                      Contact Person
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+                      Created
+                    </th>
+                    <th className="px-6 py-4 text-center text-sm font-semibold text-gray-600">
+                      Status
+                    </th>
+                    <th className="px-6 py-4 text-right text-sm font-semibold text-gray-600">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -220,14 +278,18 @@ const ServiceManagement: React.FC = () => {
                             <MessageCircle className="w-5 h-5 text-primary" />
                           </div>
                           <div>
-                            <p className="font-medium text-navy">{service.name}</p>
-                            <p className="text-sm text-gray-500 line-clamp-1">{service.description}</p>
+                            <p className="font-medium text-navy">
+                              {service.name}
+                            </p>
+                            <p className="text-sm text-gray-500 line-clamp-1">
+                              {service.description}
+                            </p>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <a 
-                          href={`https://wa.me/${service.whatsappNumber.replace(/[^0-9]/g, '')}`}
+                        <a
+                          href={`https://wa.me/${service.whatsappNumber.replace(/[^0-9]/g, "")}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-green-600 hover:underline flex items-center gap-1"
@@ -237,15 +299,18 @@ const ServiceManagement: React.FC = () => {
                         </a>
                       </td>
                       <td className="px-6 py-4 text-gray-600">
-                        {service.whatsappContactName || '-'}
+                        {service.whatsappContactName || "-"}
+                      </td>
+                      <td className="px-6 py-4 text-gray-600 text-sm">
+                        {new Date(service.createdAt).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 text-center">
                         <button
                           onClick={() => handleToggleActive(service)}
                           className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${
                             service.isActive
-                              ? 'bg-green-100 text-green-700'
-                              : 'bg-gray-100 text-gray-500'
+                              ? "bg-green-100 text-green-700"
+                              : "bg-gray-100 text-gray-500"
                           }`}
                         >
                           {service.isActive ? (
@@ -292,9 +357,12 @@ const ServiceManagement: React.FC = () => {
       {deleteId && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-semibold text-navy mb-2">Delete Service?</h3>
+            <h3 className="text-lg font-semibold text-navy mb-2">
+              Delete Service?
+            </h3>
             <p className="text-gray-600 mb-6">
-              Are you sure you want to delete this service? This action cannot be undone.
+              Are you sure you want to delete this service? This action cannot
+              be undone.
             </p>
             <div className="flex gap-3 justify-end">
               <button
@@ -318,7 +386,3 @@ const ServiceManagement: React.FC = () => {
 };
 
 export default ServiceManagement;
-
-
-
-
