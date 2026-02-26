@@ -1,16 +1,26 @@
-import { useEffect, useState } from 'react';
-import { X, ZoomIn, ExternalLink, Loader2, AlertCircle, Play } from 'lucide-react';
-import { galleryApi } from '../services/api';
-import type { GalleryItem } from '../services/api';
+import { useEffect, useState, useCallback, useRef } from "react";
+import {
+  X,
+  ZoomIn,
+  ExternalLink,
+  Loader2,
+  AlertCircle,
+  Play,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { galleryApi } from "../services/api";
+import type { GalleryItem } from "../services/api";
 
-const categories = ['All', 'Electrical', 'Solar', 'Security', 'Smart Home'];
+const categories = ["All", "Electrical", "Solar", "Security", "Smart Home"];
 
 const Gallery: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [items, setItems] = useState<GalleryItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
+  const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -18,7 +28,7 @@ const Gallery: React.FC = () => {
         const response = await galleryApi.getAll();
         setItems(response.data);
       } catch {
-        setError('Failed to load gallery');
+        setError("Failed to load gallery");
       } finally {
         setIsLoading(false);
       }
@@ -27,31 +37,78 @@ const Gallery: React.FC = () => {
   }, []);
 
   const filteredItems =
-    activeCategory === 'All'
+    activeCategory === "All"
       ? items
       : items.filter((item) => item.category === activeCategory);
 
-  const openLightbox = (item: GalleryItem) => {
-    setSelectedItem(item);
-    document.body.style.overflow = 'hidden';
+  const selectedItem =
+    selectedIndex !== null ? filteredItems[selectedIndex] : null;
+
+  const navigateToPrevious = useCallback(() => {
+    if (selectedIndex !== null) {
+      setSelectedIndex((prev) =>
+        prev !== null && prev > 0 ? prev - 1 : filteredItems.length - 1,
+      );
+    }
+  }, [selectedIndex, filteredItems.length]);
+
+  const navigateToNext = useCallback(() => {
+    if (selectedIndex !== null) {
+      setSelectedIndex((prev) =>
+        prev !== null && prev < filteredItems.length - 1 ? prev + 1 : 0,
+      );
+    }
+  }, [selectedIndex, filteredItems.length]);
+
+  const openLightbox = (index: number) => {
+    setSelectedIndex(index);
+    document.body.style.overflow = "hidden";
   };
 
   const closeLightbox = () => {
-    setSelectedItem(null);
-    document.body.style.overflow = '';
+    setSelectedIndex(null);
+    document.body.style.overflow = "";
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+      if (e.key === "ArrowLeft") navigateToPrevious();
+      if (e.key === "ArrowRight") navigateToNext();
+      if (e.key === "Escape") closeLightbox();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedIndex, navigateToPrevious, navigateToNext]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) navigateToNext();
+      else navigateToPrevious();
+    }
+    touchStartX.current = null;
   };
 
   const getServiceHashForCategory = (category: string) => {
     const normalized = category.trim().toLowerCase();
     const map: Record<string, string> = {
-      electrical: 'electrical',
-      solar: 'solar',
-      security: 'security',
-      'smart home': 'smarthome',
-      'smart-home': 'smarthome',
-      smarthome: 'smarthome',
+      electrical: "electrical",
+      solar: "solar",
+      security: "security",
+      "smart home": "smarthome",
+      "smart-home": "smarthome",
+      smarthome: "smarthome",
     };
-    return map[normalized] ?? '';
+    return map[normalized] ?? "";
   };
 
   return (
@@ -61,7 +118,8 @@ const Gallery: React.FC = () => {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80)',
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80)",
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/90 to-navy/80" />
@@ -76,8 +134,9 @@ const Gallery: React.FC = () => {
               Project Gallery
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
-              Explore our portfolio of completed projects. Each installation represents
-              our commitment to quality, safety, and customer satisfaction.
+              Explore our portfolio of completed projects. Each installation
+              represents our commitment to quality, safety, and customer
+              satisfaction.
             </p>
           </div>
         </div>
@@ -92,10 +151,11 @@ const Gallery: React.FC = () => {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeCategory === category
-                  ? 'bg-gradient-to-r from-primary to-primary-dark text-white shadow-lg shadow-primary/25 scale-105'
-                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-primary/30'
-                  }`}
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  activeCategory === category
+                    ? "bg-gradient-to-r from-primary to-primary-dark text-white shadow-lg shadow-primary/25 scale-105"
+                    : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 hover:border-primary/30"
+                }`}
               >
                 {category}
               </button>
@@ -120,14 +180,14 @@ const Gallery: React.FC = () => {
           {/* Gallery Grid */}
           {!isLoading && !error && (
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-              {filteredItems.map((item) => (
+              {filteredItems.map((item, index) => (
                 <div
                   key={item._id}
-                  onClick={() => openLightbox(item)}
+                  onClick={() => openLightbox(index)}
                   className="group relative rounded-2xl overflow-hidden shadow-soft hover:shadow-strong transition-all duration-500 cursor-pointer hover-lift"
                 >
                   <div className="aspect-[4/5] sm:aspect-[4/3] overflow-hidden relative">
-                    {item.mediaType === 'video' ? (
+                    {item.mediaType === "video" ? (
                       <>
                         <video
                           src={item.url}
@@ -154,9 +214,15 @@ const Gallery: React.FC = () => {
 
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-2 sm:p-6">
-                    <span className="badge badge-primary mb-1 sm:mb-3 self-start text-[8px] sm:text-xs px-1 py-0 sm:px-2.5 sm:py-1">{item.category}</span>
-                    <h3 className="text-[10px] sm:text-xl font-bold text-white mb-0.5 sm:mb-2 line-clamp-1">{item.title}</h3>
-                    <p className="text-gray-300 text-[8px] sm:text-sm line-clamp-1 hidden xs:block">{item.description}</p>
+                    <span className="badge badge-primary mb-1 sm:mb-3 self-start text-[8px] sm:text-xs px-1 py-0 sm:px-2.5 sm:py-1">
+                      {item.category}
+                    </span>
+                    <h3 className="text-[10px] sm:text-xl font-bold text-white mb-0.5 sm:mb-2 line-clamp-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-300 text-[8px] sm:text-sm line-clamp-1 hidden xs:block">
+                      {item.description}
+                    </p>
 
                     {/* View Icon */}
                     <div className="absolute top-2 right-2 sm:top-4 sm:right-4 w-6 h-6 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
@@ -166,7 +232,9 @@ const Gallery: React.FC = () => {
 
                   {/* Category Badge (always visible) */}
                   <div className="absolute top-2 left-2 sm:top-4 sm:left-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                    <span className="badge badge-primary text-[8px] sm:text-xs px-1 py-0 sm:px-2.5 sm:py-1">{item.category}</span>
+                    <span className="badge badge-primary text-[8px] sm:text-xs px-1 py-0 sm:px-2.5 sm:py-1">
+                      {item.category}
+                    </span>
                   </div>
                 </div>
               ))}
@@ -193,8 +261,8 @@ const Gallery: React.FC = () => {
               Ready to Create Something Amazing?
             </h2>
             <p className="text-gray-600 text-lg mb-8">
-              Let's discuss your requirements and create something amazing together.
-              Our team is ready to bring your vision to life.
+              Let's discuss your requirements and create something amazing
+              together. Our team is ready to bring your vision to life.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -217,25 +285,52 @@ const Gallery: React.FC = () => {
       </section>
 
       {/* Lightbox */}
-      {selectedItem && (
+      {selectedIndex !== null && selectedItem && (
         <div
-          className="fixed inset-0 z-[100] bg-navy/95 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] bg-navy/95 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 animate-in fade-in duration-300"
           onClick={closeLightbox}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
+          {/* Navigation Buttons */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              navigateToPrevious();
+            }}
+            className="absolute left-2 sm:left-6 z-[110] w-10 h-10 sm:w-14 sm:h-14 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 group"
+            aria-label="Previous Image"
+          >
+            <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8 text-white group-hover:-translate-x-1 transition-transform" />
+          </button>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              navigateToNext();
+            }}
+            className="absolute right-2 sm:right-6 z-[110] w-10 h-10 sm:w-14 sm:h-14 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 group"
+            aria-label="Next Image"
+          >
+            <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 text-white group-hover:translate-x-1 transition-transform" />
+          </button>
+
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors duration-300"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[110] w-10 h-10 sm:w-12 sm:h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors duration-300"
+            aria-label="Close"
           >
-            <X className="w-6 h-6 text-white" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </button>
 
           <div
-            className="w-full h-full max-w-[95vw] max-h-[90vh] bg-white rounded-2xl overflow-hidden shadow-strong flex flex-col"
+            className="w-full h-full max-w-[95vw] max-h-[90vh] bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col relative z-[100] animate-in zoom-in-95 duration-300"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative flex-grow bg-black flex items-center justify-center">
-              {selectedItem.mediaType === 'video' ? (
+            <div className="relative flex-grow bg-black flex items-center justify-center overflow-hidden">
+              {selectedItem.mediaType === "video" ? (
                 <video
+                  key={selectedItem.url} // Key forces video re-render on change
                   src={selectedItem.url}
                   className="w-full h-full max-h-[75vh] object-contain"
                   controls
@@ -243,28 +338,41 @@ const Gallery: React.FC = () => {
                 />
               ) : (
                 <img
+                  key={selectedItem.url} // Key forces animation re-trigger on change if needed
                   src={selectedItem.url}
                   alt={selectedItem.title}
-                  className="w-full h-full max-h-[75vh] object-contain"
+                  className="w-full h-full max-h-[75vh] object-contain transition-all duration-500"
                 />
               )}
+
+              {/* Image Counter */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full text-white text-xs font-medium">
+                {(selectedIndex ?? 0) + 1} / {filteredItems.length}
+              </div>
             </div>
-            <div className="p-4 sm:p-6 md:p-8 bg-white">
-              <div className="flex items-center justify-between mb-2 sm:mb-4">
-                <span className="badge badge-primary">{selectedItem.category}</span>
+            <div className="p-4 sm:p-6 md:p-8 bg-white overflow-y-auto">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                <span className="badge badge-primary self-start">
+                  {selectedItem.category}
+                </span>
                 <a
-                  href={`/services${getServiceHashForCategory(selectedItem.category)
-                    ? `#${getServiceHashForCategory(selectedItem.category)}`
-                    : ''
-                    }`}
-                  className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-300 text-sm sm:text-base"
+                  href={`/services${
+                    getServiceHashForCategory(selectedItem.category)
+                      ? `#${getServiceHashForCategory(selectedItem.category)}`
+                      : ""
+                  }`}
+                  className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all duration-300 text-sm sm:text-base"
                 >
                   Request Similar Project
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-navy mb-1 sm:mb-3">{selectedItem.title}</h2>
-              <p className="text-gray-600 text-sm sm:text-base md:text-lg line-clamp-2 md:line-clamp-none">{selectedItem.description}</p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-navy mb-2 sm:mb-3">
+                {selectedItem.title}
+              </h2>
+              <p className="text-gray-600 text-sm sm:text-base md:text-lg">
+                {selectedItem.description}
+              </p>
             </div>
           </div>
         </div>
@@ -274,8 +382,3 @@ const Gallery: React.FC = () => {
 };
 
 export default Gallery;
-
-
-
-
-

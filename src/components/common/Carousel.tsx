@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Button from './Button';
+import * as React from "react";
+import { useState, useEffect, useCallback } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Button from "./Button";
 
 interface CarouselSlide {
   id: number;
@@ -62,10 +62,7 @@ const Carousel: React.FC<CarouselProps> = ({
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {slides.map((slide) => (
-          <div
-            key={slide.id}
-            className="relative w-full h-full flex-shrink-0"
-          >
+          <div key={slide.id} className="relative w-full h-full flex-shrink-0">
             {/* Background Image */}
             <div
               className="absolute inset-0 bg-cover bg-center"
@@ -78,7 +75,10 @@ const Carousel: React.FC<CarouselProps> = ({
             <div className="relative h-full flex items-start sm:items-center pt-20 sm:pt-20 pb-32 sm:pb-28">
               <div className="container-custom">
                 <div className="max-w-2xl text-white px-2 sm:px-0 mt-8 sm:mt-0">
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-3 sm:mb-4 md:mb-6 leading-tight text-white drop-shadow-lg" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
+                  <h1
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-3 sm:mb-4 md:mb-6 leading-tight text-white drop-shadow-lg"
+                    style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.5)" }}
+                  >
                     {slide.headline}
                   </h1>
                   <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white font-bold mb-4 sm:mb-6 md:mb-8 leading-relaxed drop-shadow-md">
@@ -87,7 +87,11 @@ const Carousel: React.FC<CarouselProps> = ({
                   {slide.ctaText && slide.ctaLink && (
                     <div className="mt-4 sm:mt-6">
                       <Button
-                        variant={slide.ctaText.includes('WhatsApp') ? 'whatsapp' : 'primary'}
+                        variant={
+                          slide.ctaText.includes("WhatsApp")
+                            ? "whatsapp"
+                            : "primary"
+                        }
                         size="md"
                         href={slide.ctaLink}
                         isExternal={slide.isExternal}
@@ -133,8 +137,8 @@ const Carousel: React.FC<CarouselProps> = ({
               onClick={() => goToSlide(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white ${
                 index === currentSlide
-                  ? 'bg-white scale-125'
-                  : 'bg-white/50 hover:bg-white/75'
+                  ? "bg-white scale-125"
+                  : "bg-white/50 hover:bg-white/75"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -146,7 +150,3 @@ const Carousel: React.FC<CarouselProps> = ({
 };
 
 export default Carousel;
-
-
-
-
