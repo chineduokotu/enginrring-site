@@ -13,9 +13,12 @@ export const getImageUrl = (image: any) => {
   if (!image) return '';
   
   // If image is an object { url, publicId }
-  if (typeof image === 'object' && image.url) {
-    if (image.url.startsWith('http')) return image.url;
-    return `https://thebuilders-server.onrender.com${image.url.startsWith('/') ? '' : '/'}${image.url}`;
+  if (typeof image === 'object' && image !== null) {
+    const url = image.url;
+    if (typeof url === 'string') {
+      if (url.startsWith('http')) return url;
+      return `https://thebuilders-server.onrender.com${url.startsWith('/') ? '' : '/'}${url}`;
+    }
   }
   
   // legacy: if image is just a string path/URL
