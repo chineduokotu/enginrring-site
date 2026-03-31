@@ -9,11 +9,22 @@ const api = axios.create({
   baseURL: API_BASE_URL,
 });
 
-export const getImageUrl = (path: string) => {
-  if (!path) return '';
-  if (path.startsWith('http')) return path;
-  // Handle relative paths from the backend (assuming backend is at port 3000)
-  return `https://thebuilders-server.onrender.com${path.startsWith('/') ? '' : '/'}${path}`;
+export const getImageUrl = (image: any) => {
+  if (!image) return '';
+  
+  // If image is an object { url, publicId }
+  if (typeof image === 'object' && image.url) {
+    if (image.url.startsWith('http')) return image.url;
+    return `https://thebuilders-server.onrender.com${image.url.startsWith('/') ? '' : '/'}${image.url}`;
+  }
+  
+  // legacy: if image is just a string path/URL
+  if (typeof image === 'string') {
+    if (image.startsWith('http')) return image;
+    return `https://thebuilders-server.onrender.com${image.startsWith('/') ? '' : '/'}${image}`;
+  }
+  
+  return '';
 };
 
 // Add auth token to requests
@@ -115,7 +126,10 @@ export type Service = {
   name: string;
   description: string;
   icon: string;
-  image: string;
+  image: {
+    url: string;
+    publicId: string;
+  };
   features: string[];
   whatsappNumber: string;
   whatsappContactName: string;

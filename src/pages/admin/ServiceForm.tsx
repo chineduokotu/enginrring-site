@@ -31,6 +31,7 @@ const ServiceForm: React.FC = () => {
     description: '',
     icon: 'Zap',
     image: '',
+    publicId: '',
     features: [''],
     whatsappNumber: '',
     whatsappContactName: '',
@@ -47,7 +48,8 @@ const ServiceForm: React.FC = () => {
             name: service.name,
             description: service.description,
             icon: service.icon,
-            image: service.image,
+            image: typeof service.image === 'object' ? service.image.url : service.image,
+            publicId: typeof service.image === 'object' ? service.image.publicId : '',
             features: service.features.length > 0 ? service.features : [''],
             whatsappNumber: service.whatsappNumber,
             whatsappContactName: service.whatsappContactName,
@@ -143,7 +145,7 @@ const ServiceForm: React.FC = () => {
           name: formData.name.trim(),
           description: formData.description.trim(),
           icon: formData.icon,
-          image: formData.image.trim(),
+          image: formData.image.trim() ? { url: formData.image.trim(), publicId: formData.publicId || '' } : { url: '', publicId: '' },
           features: formData.features.filter(f => f.trim() !== ''),
           whatsappNumber: formData.whatsappNumber.trim(),
           whatsappContactName: formData.whatsappContactName.trim(),
@@ -287,7 +289,7 @@ const ServiceForm: React.FC = () => {
             {(imagePreview || formData.image) && (
               <div className="mb-4 relative inline-block">
                 <img
-                  src={imagePreview || getImageUrl(formData.image)}
+                  src={imagePreview || (formData.image ? getImageUrl({ url: formData.image, publicId: formData.publicId }) : '')}
                   alt="Service preview"
                   className="w-40 h-28 object-cover rounded-lg border border-gray-300"
                 />
