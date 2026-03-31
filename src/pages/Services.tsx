@@ -22,7 +22,7 @@ const fallbackServices = [
     icon: 'Zap',
     name: 'Electrical Installation',
     description: 'Comprehensive electrical solutions for residential and commercial properties. From new installations to upgrades and repairs, our certified electricians ensure safety and efficiency.',
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80',
+    image: { url: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80', publicId: '' },
     features: [
       'Complete wiring and rewiring',
       'Panel upgrades and installations',
@@ -32,13 +32,15 @@ const fallbackServices = [
     whatsappNumber: '09136030440',
     whatsappContactName: '',
     isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     _id: 'fallback-2',
     icon: 'Shield',
     name: 'CCTV Installation & Security Systems',
     description: 'State-of-the-art surveillance and security solutions to protect your property. We provide end-to-end services from design to installation and maintenance.',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    image: { url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', publicId: '' },
     features: [
       'HD and 4K camera systems',
       'Remote monitoring setup',
@@ -48,13 +50,15 @@ const fallbackServices = [
     whatsappNumber: '09136030440',
     whatsappContactName: '',
     isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     _id: 'fallback-3',
     icon: 'Sun',
     name: 'Solar Energy Solutions',
     description: 'Harness the power of renewable energy with our premium solar installations. Reduce your electricity bills and carbon footprint with sustainable power.',
-    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80',
+    image: { url: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80', publicId: '' },
     features: [
       'Solar panel installation',
       'Battery storage systems',
@@ -64,13 +68,15 @@ const fallbackServices = [
     whatsappNumber: '09136030440',
     whatsappContactName: '',
     isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     _id: 'fallback-4',
     icon: 'Home',
     name: 'Smart Home Automation',
     description: 'Transform your living space with intelligent automation systems. Control lighting, climate, security, and appliances from anywhere in the world.',
-    image: 'https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=800&q=80',
+    image: { url: 'https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=800&q=80', publicId: '' },
     features: [
       'Smart lighting systems',
       'Climate control automation',
@@ -80,13 +86,15 @@ const fallbackServices = [
     whatsappNumber: '09136030440',
     whatsappContactName: '',
     isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     _id: 'fallback-5',
     icon: 'Fence',
     name: 'Electric Fencing & Perimeter Security',
     description: 'Robust perimeter protection for residential and commercial properties. Our electric fencing solutions provide reliable security with professional installation.',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+    image: { url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80', publicId: '' },
     features: [
       'High-voltage security fencing',
       'Integration with alarm systems',
@@ -96,6 +104,8 @@ const fallbackServices = [
     whatsappNumber: '09136030440',
     whatsappContactName: '',
     isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
 ];
 
