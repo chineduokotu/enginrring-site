@@ -12,7 +12,7 @@ import {
   Download,
   CheckCircle,
 } from "lucide-react";
-import { productsApi } from "../../services/api";
+import { productsApi, getImageUrl } from "../../services/api";
 import type { Product } from "../../services/api";
 import ConfirmDialog from "../../components/common/ConfirmDialog";
 
@@ -169,7 +169,7 @@ const ProductList: React.FC = () => {
                   <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                     {product.images[0] ? (
                       <img
-                        src={product.images[0].url}
+                        src={getImageUrl(product.images[0].url)}
                         alt={product.name}
                         className="w-full h-full object-cover"
                       />
@@ -275,7 +275,7 @@ const ProductList: React.FC = () => {
                           <div className="w-14 h-14 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                             {product.images[0] ? (
                               <img
-                                src={product.images[0].url}
+                                src={getImageUrl(product.images[0].url)}
                                 alt={product.name}
                                 className="w-full h-full object-cover"
                               />

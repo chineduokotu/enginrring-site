@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Upload, X, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
-import { productsApi, categoriesApi } from '../../services/api';
+import { productsApi, categoriesApi, getImageUrl } from '../../services/api';
 import type { Product, Category } from '../../services/api';
 
 interface ImagePreview {
@@ -64,7 +64,7 @@ const ProductForm: React.FC = () => {
           });
           setImages(
             product.images.map((img) => ({
-              url: img.url,
+              url: getImageUrl(img.url),
               publicId: img.publicId,
               isNew: false,
             }))

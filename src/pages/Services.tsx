@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Zap, Shield, Sun, Home as HomeIcon, Fence, ArrowRight, CheckCircle, Wrench, Settings, Loader2, AlertCircle } from 'lucide-react';
 import Button from '../components/common/Button';
-import { servicesApi } from '../services/api';
+import { servicesApi, getImageUrl } from '../services/api';
 import type { Service } from '../services/api';
 
 // Icon mapping for dynamic icons
@@ -229,7 +229,7 @@ const Services: React.FC = () => {
                     <div className={`relative ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
                       <div className="relative rounded-2xl overflow-hidden shadow-strong group">
                         <img
-                          src={service.image || 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80'}
+                          src={getImageUrl(service.image) || 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80'}
                           alt={service.name}
                           className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
                           loading="lazy"

@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext, createContext } from 'react';
-import type { ReactNode } from 'react';
-import { authApi } from '../services/api';
+import { useState, useEffect, useContext, createContext } from "react";
+import type { ReactNode } from "react";
+import { authApi } from "../services/api";
 
 interface Admin {
   id: string;
@@ -18,9 +18,13 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [admin, setAdmin] = useState<Admin | null>(null);
-  const [token, setToken] = useState<string | null>(localStorage.getItem('adminToken'));
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem("adminToken"),
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +35,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           setAdmin(response.data.admin);
         } catch {
           // Token invalid, clear it
-          localStorage.removeItem('adminToken');
+          localStorage.removeItem("adminToken");
           setToken(null);
           setAdmin(null);
         }
@@ -44,13 +48,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const login = async (username: string, password: string) => {
     const response = await authApi.login(username, password);
     const { token: newToken, admin: adminData } = response.data;
-    localStorage.setItem('adminToken', newToken);
+    localStorage.setItem("adminToken", newToken);
     setToken(newToken);
     setAdmin(adminData);
   };
 
   const logout = () => {
-    localStorage.removeItem('adminToken');
+    localStorage.removeItem("adminToken");
     setToken(null);
     setAdmin(null);
   };
@@ -74,9 +78,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
-
-

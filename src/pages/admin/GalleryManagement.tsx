@@ -10,7 +10,7 @@ import {
   Film,
   X,
 } from "lucide-react";
-import { galleryApi } from "../../services/api";
+import { galleryApi, getImageUrl } from "../../services/api";
 import type { GalleryItem } from "../../services/api";
 import ConfirmDialog from "../../components/common/ConfirmDialog";
 
@@ -294,7 +294,7 @@ const GalleryManagement: React.FC = () => {
               <div className="relative aspect-[4/3]">
                 {item.mediaType === "video" ? (
                   <video
-                    src={item.url}
+                    src={getImageUrl(item.url)}
                     className="w-full h-full object-cover"
                     muted
                     playsInline
@@ -307,7 +307,7 @@ const GalleryManagement: React.FC = () => {
                   />
                 ) : (
                   <img
-                    src={item.url}
+                    src={getImageUrl(item.url)}
                     alt={item.title}
                     className="w-full h-full object-cover"
                   />

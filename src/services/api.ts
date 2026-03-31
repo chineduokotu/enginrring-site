@@ -1,13 +1,20 @@
 import axios from 'axios';
 
-const production_url = 'https://thebuilders-server.onrender.com/api';
-//const local_url = 'http://localhost:3000/api';
+//const production_url = 'https://thebuilders-server.onrender.com/api';
+const local_url = 'http://localhost:3000/api';
 
-const API_BASE_URL = production_url;
+const API_BASE_URL = local_url;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
 });
+
+export const getImageUrl = (path: string) => {
+  if (!path) return '';
+  if (path.startsWith('http')) return path;
+  // Handle relative paths from the backend (assuming backend is at port 3000)
+  return `http://localhost:3000${path.startsWith('/') ? '' : '/'}${path}`;
+};
 
 // Add auth token to requests
 api.interceptors.request.use((config) => {

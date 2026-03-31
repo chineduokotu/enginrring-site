@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Plus, X, Loader2, AlertCircle, Save, Upload } from 'lucide-react';
-import { servicesApi } from '../../services/api';
+import { servicesApi, getImageUrl } from '../../services/api';
 import type { Service } from '../../services/api';
 
 const iconOptions = [
@@ -287,7 +287,7 @@ const ServiceForm: React.FC = () => {
             {(imagePreview || formData.image) && (
               <div className="mb-4 relative inline-block">
                 <img
-                  src={imagePreview || formData.image}
+                  src={imagePreview || getImageUrl(formData.image)}
                   alt="Service preview"
                   className="w-40 h-28 object-cover rounded-lg border border-gray-300"
                 />

@@ -1,17 +1,17 @@
-import * as React from 'react';
-import { Outlet, NavLink, Navigate, useNavigate } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Package, 
-  Image, 
-  LogOut, 
+import * as React from "react";
+import { Outlet, NavLink, Navigate, useNavigate } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Package,
+  Image,
+  LogOut,
   Menu,
   X,
   Store,
   Wrench,
-  ListTree
-} from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+  ListTree,
+} from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
 
 const AdminLayout: React.FC = () => {
   const { isAuthenticated, isLoading, logout, admin } = useAuth();
@@ -32,31 +32,31 @@ const AdminLayout: React.FC = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/admin/login');
+    navigate("/admin/login");
   };
 
   const navItems = [
-    { path: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-    { path: '/admin/products', icon: Package, label: 'Products' },
-    { path: '/admin/categories', icon: ListTree, label: 'Categories' },
-    { path: '/admin/services', icon: Wrench, label: 'Services' },
-    { path: '/admin/gallery', icon: Image, label: 'Gallery' },
+    { path: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+    { path: "/admin/products", icon: Package, label: "Products" },
+    { path: "/admin/categories", icon: ListTree, label: "Categories" },
+    { path: "/admin/services", icon: Wrench, label: "Services" },
+    { path: "/admin/gallery", icon: Image, label: "Gallery" },
   ];
 
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
-      <aside 
+      <aside
         className={`fixed top-0 left-0 z-50 w-64 h-full bg-navy transition-transform duration-300 lg:translate-x-0 ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex flex-col h-full">
@@ -83,8 +83,8 @@ const AdminLayout: React.FC = () => {
                 className={({ isActive }) =>
                   `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                     isActive
-                      ? 'bg-primary text-white'
-                      : 'text-gray-300 hover:bg-white/10'
+                      ? "bg-primary text-white"
+                      : "text-gray-300 hover:bg-white/10"
                   }`
                 }
               >
@@ -133,10 +133,7 @@ const AdminLayout: React.FC = () => {
             <div className="flex-1 lg:hidden text-center">
               <h1 className="font-bold text-navy">Admin Panel</h1>
             </div>
-            <a
-              href="/store"
-              className="text-sm text-primary hover:underline"
-            >
+            <a href="/store" className="text-sm text-primary hover:underline">
               View Store →
             </a>
           </div>
@@ -152,6 +149,3 @@ const AdminLayout: React.FC = () => {
 };
 
 export default AdminLayout;
-
-
-
