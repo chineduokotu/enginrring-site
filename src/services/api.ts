@@ -13,7 +13,7 @@ export const getImageUrl = (path: string) => {
   if (!path) return '';
   if (path.startsWith('http')) return path;
   // Handle relative paths from the backend (assuming backend is at port 3000)
-  return `http://localhost:3000${path.startsWith('/') ? '' : '/'}${path}`;
+  return `https://thebuilders-server.onrender.com${path.startsWith('/') ? '' : '/'}${path}`;
 };
 
 // Add auth token to requests
