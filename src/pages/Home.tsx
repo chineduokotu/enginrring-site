@@ -16,6 +16,9 @@ import Hero from "../components/sections/Hero";
 import ServiceCard from "../components/sections/ServiceCard";
 import Button from "../components/common/Button";
 import CountUp from "../components/common/CountUp";
+import elec from  "../assets/image/elec.jpg";
+import solar from "../assets/image/solar.jpg";
+
 
 const heroSlides = [
   {
@@ -96,8 +99,7 @@ const services = [
     title: "Electrical Installation",
     description:
       "Complete electrical solutions from wiring to panel upgrades, delivered by certified professionals.",
-    image:
-      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&q=80",
+    image: elec,
   },
   {
     icon: Shield,
@@ -113,7 +115,7 @@ const services = [
     description:
       "Sustainable power solutions with high-efficiency solar panels and battery storage systems.",
     image:
-      "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&q=80",
+      solar,
   },
   {
     icon: HomeIcon,
@@ -166,7 +168,7 @@ const Home: React.FC = () => {
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
-            {services.slice(0, 3).map((service) => (
+            {services.slice(0).map((service) => (
               <ServiceCard
                 key={service.title}
                 icon={service.icon}
