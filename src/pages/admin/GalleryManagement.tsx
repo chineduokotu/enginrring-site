@@ -10,11 +10,11 @@ import {
   Film,
   X,
 } from "lucide-react";
-import { galleryApi, getImageUrl } from "../../services/api";
-import type { GalleryItem } from "../../services/api";
+import { galleryApi, categoriesApi, getImageUrl } from "../../services/api";
+import type { GalleryItem, Category } from "../../services/api";
 import ConfirmDialog from "../../components/common/ConfirmDialog";
 
-const categories = ["Electrical", "Solar", "Security", "Smart Home"];
+const defaultGalleryCategories = ["Electrical", "Solar", "Security", "Smart Home"];
 
 const GalleryManagement: React.FC = () => {
   const [items, setItems] = useState<GalleryItem[]>([]);
@@ -26,10 +26,11 @@ const GalleryManagement: React.FC = () => {
 
   // Upload form state
   const [showUploadForm, setShowUploadForm] = useState(false);
+  const [categories, setCategories] = useState<string[]>(defaultGalleryCategories);
   const [uploadData, setUploadData] = useState({
     title: "",
     description: "",
-    category: categories[0],
+    category: defaultGalleryCategories[0],
   });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -48,8 +49,28 @@ const GalleryManagement: React.FC = () => {
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      const response = await categoriesApi.getAll();
+      const categoryNames = response.data.map((category: Category) => category.name);
+      setCategories(categoryNames.length > 0 ? categoryNames : defaultGalleryCategories);
+      setUploadData((prev) => ({
+        ...prev,
+        category:
+          categoryNames.length > 0 ? categoryNames[0] : defaultGalleryCategories[0],
+      }));
+    } catch {
+      setCategories(defaultGalleryCategories);
+      setUploadData((prev) => ({
+        ...prev,
+        category: defaultGalleryCategories[0],
+      }));
+    }
+  };
+
   useEffect(() => {
     fetchItems();
+    fetchCategories();
   }, []);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {

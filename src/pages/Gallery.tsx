@@ -9,13 +9,14 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { galleryApi } from "../services/api";
-import type { GalleryItem } from "../services/api";
+import { galleryApi, categoriesApi } from "../services/api";
+import type { GalleryItem, Category } from "../services/api";
 
-const categories = ["All", "Electrical", "Solar", "Security", "Smart Home"];
+const defaultCategories = ["All", "Electrical", "Solar", "Security", "Smart Home"];
 
 const Gallery: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [categories, setCategories] = useState<string[]>(defaultCategories);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [items, setItems] = useState<GalleryItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,6 +35,20 @@ const Gallery: React.FC = () => {
       }
     };
     fetchGallery();
+  }, []);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await categoriesApi.getAll();
+        const categoryNames = response.data.map((category: Category) => category.name);
+        setCategories(["All", ...categoryNames]);
+      } catch {
+        setCategories(defaultCategories);
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   const filteredItems =
