@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const production_url = 'https://thebuilders-server.onrender.com/api';
-//const local_url = 'http://localhost:3000/api';
+//const production_url = 'https://thebuilders-server.onrender.com/api';
+const local_url = 'http://localhost:3000/api';
 
-const API_BASE_URL = production_url;
+const API_BASE_URL = local_url;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -17,7 +17,7 @@ export const getImageUrl = (image: any) => {
     const url = image.url;
     if (typeof url === 'string') {
       if (url.startsWith('http')) return url;
-      return `https://thebuilders-server.onrender.com${url.startsWith('/') ? '' : '/'}${url}`;
+      return `http://localhost:3000${url.startsWith('/') ? '' : '/'}${url}`;
     }
   }
   
