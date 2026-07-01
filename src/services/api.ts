@@ -1,34 +1,29 @@
 import axios from 'axios';
 
-const production_url = 'https://thebuilders-server.onrender.com/api';
-//const local_url = 'http://localhost:3000/api';
+//const production_url='https://thebuilders-server.onrender.com/api';
+const local_url='http://localhost:3000/api' ;
 
-const API_BASE_URL = production_url;
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-});
+const API_BASE_URL = local_url;
 
 export const getImageUrl = (image: any) => {
   if (!image) return '';
-  
-  // If image is an object { url, publicId }
   if (typeof image === 'object' && image !== null) {
     const url = image.url;
     if (typeof url === 'string') {
       if (url.startsWith('http')) return url;
-      return `http://localhost:3000${url.startsWith('/') ? '' : '/'}${url}`;
+      return `${API_BASE_URL}${url.startsWith('/') ? '' : '/'}${url}`;
     }
   }
-  
-  // legacy: if image is just a string path/URL
   if (typeof image === 'string') {
     if (image.startsWith('http')) return image;
-    return `https://thebuilders-server.onrender.com${image.startsWith('/') ? '' : '/'}${image}`;
+    return `${API_BASE_URL}${image.startsWith('/') ? '' : '/'}${image}`;
   }
-  
   return '';
 };
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+});
 
 // Add auth token to requests
 api.interceptors.request.use((config) => {
@@ -129,10 +124,7 @@ export type Service = {
   name: string;
   description: string;
   icon: string;
-  image: {
-    url: string;
-    publicId: string;
-  };
+  image: string;
   features: string[];
   whatsappNumber: string;
   whatsappContactName: string;
