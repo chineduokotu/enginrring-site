@@ -313,7 +313,7 @@ const Home: React.FC = () => {
             <Button
               variant="whatsapp"
               size="lg"
-              href="https://wa.me/1234567890"
+              href="https://wa.me/2349136030440"
               isExternal
             >
               WhatsApp Us Now
